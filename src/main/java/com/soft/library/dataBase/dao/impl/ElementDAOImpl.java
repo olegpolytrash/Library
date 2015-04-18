@@ -2,6 +2,7 @@ package com.soft.library.dataBase.dao.impl;
 
 import java.util.List;
 import com.soft.library.dataBase.dao.BaseDao;
+import com.soft.library.dataBase.model.Author;
 
 import javax.persistence.EntityManager;
 
@@ -29,8 +30,8 @@ public class ElementDAOImpl<E> implements BaseDao<E> {
     }
 
     @Override
-    public void update(E element) {
-        entityManager.merge(element);
+    public E getUpdatedEntity(E element) {
+        return entityManager.merge(element);
     }
 
     @SuppressWarnings("unchecked")

@@ -7,6 +7,6 @@ public interface BaseDao  <E>{
     E findById(int id);
     void save(E entity);
     void remove(E entity);
-    void update(E entity);
+    E getUpdatedEntity(E entity);
     List<E> getAll();
 }
