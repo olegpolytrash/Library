@@ -11,9 +11,9 @@ public class UpdateBookCommand implements Command {
     @Override
     public void execute() {
         System.out.println("Type in Book's old name: ");
-        String newName = ValidData.getWords();
-        System.out.println("Type in Book's new name: ");
         String oldName = ValidData.getWords();
+        System.out.println("Type in Book's new name: ");
+        String newName = ValidData.getWords();
         new AdvBookService().updateBooks(oldName, newName);
     }
 

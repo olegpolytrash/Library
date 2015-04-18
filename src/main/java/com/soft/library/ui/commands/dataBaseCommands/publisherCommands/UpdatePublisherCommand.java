@@ -1,5 +1,7 @@
 package com.soft.library.ui.commands.dataBaseCommands.publisherCommands;
 
+import com.soft.library.dataBase.service.AdvPublisherService;
+import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
 /**
@@ -8,12 +10,11 @@ import com.soft.library.ui.commandCore.Command;
 public class UpdatePublisherCommand implements Command {
     @Override
     public void execute() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Type in Publisher's old name, new name: ");
-//        String newName = scanner.nextLine();
-//        String oldName = newName.substring(0, newName.indexOf(','));
-//        newName = newName.substring(newName.indexOf(',')).trim();
-//        AdvPublisherService.updatePublishers(oldName, newName);
+        System.out.println("Type in Publisher's old name: ");
+        String oldName = ValidData.getWords();
+        System.out.println("Type in Publisher's new name: ");
+        String newName = ValidData.getWords();
+        new AdvPublisherService().updatePublishers(oldName, newName);
     }
 
     @Override

@@ -11,9 +11,9 @@ public class UpdateAuthorCommand implements Command {
     @Override
     public void execute() {
         System.out.println("Type in Author's old name: ");
-        String newName = ValidData.getWords();
-        System.out.println("Type in Author's new name: ");
         String oldName = ValidData.getWords();
+        System.out.println("Type in Author's new name: ");
+        String newName = ValidData.getWords();
         new AdvAuthorService().updateAuthors(oldName, newName);
         
     }

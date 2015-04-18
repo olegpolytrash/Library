@@ -45,7 +45,8 @@ public class AdvBookService {
         for (Book a : bookDAO.getAll()) {
             if (a.getName().equals(oldName)) {
                 a.setName(newName);
-                bookDAO.update(a);
+                a = bookDAO.getUpdatedEntity(a);
+                bookDAO.save(a);
                 count++;
             }
         }

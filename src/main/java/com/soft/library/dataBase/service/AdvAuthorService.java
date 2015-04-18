@@ -13,7 +13,6 @@ import com.soft.library.dataBase.dao.impl.AuthorDAOImpl;
 import com.soft.library.dataBase.dao.impl.BookDAOImpl;
 import com.soft.library.dataBase.dataBaseCore.JPAUtil;
 import com.soft.library.dataBase.model.Author;
-import com.soft.library.dataBase.model.Book;
 
 /**
  * @author rd
@@ -52,7 +51,7 @@ public class AdvAuthorService {
         for (Author a : authorDAO.getAll()) {
             if (a.getName().equals(oldName)) {
                 a.setName(newName);
-                authorDAO.update(a);
+                a = authorDAO.getUpdatedEntity(a);
                 count++;
             }
         }
