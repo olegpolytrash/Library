@@ -51,7 +51,7 @@ public class ValidData {
 
     public static Set<String> continiouslyTyping(String helloMessage) {
         Set<String> names = new HashSet<String>();
-        String temp = ValidData.getWords();
+        String temp = "";
 
         while (!(temp.equalsIgnoreCase("exit")) || names.size() == 0) {
             System.out.println(helloMessage);

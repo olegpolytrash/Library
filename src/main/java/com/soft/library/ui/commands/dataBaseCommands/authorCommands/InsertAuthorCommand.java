@@ -19,12 +19,12 @@ public class InsertAuthorCommand implements Command {
     public void execute() {
         AdvAuthorService aas = new AdvAuthorService();
         String authorName;
-        
+
         System.out.println("Type in Author's name: ");
         authorName = ValidData.getWords();
-        System.out.println("Type in books written by this author: ");
         Set<String> books = ValidData
-                .continiouslyTyping("Type in at least one book. Enter \"exit\" for quit");
+                .continiouslyTyping("Type in at least one book written by "
+                        + "this author. Enter \"exit\" for quit");
         aas.addAuthor(authorName, books);
     }
 

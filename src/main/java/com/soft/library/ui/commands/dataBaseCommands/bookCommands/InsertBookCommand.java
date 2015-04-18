@@ -18,9 +18,9 @@ public class InsertBookCommand implements Command {
 
         System.out.println("Type in Book's name: ");
         bookName = ValidData.getWords();
-        System.out.println("Type in author who wrote this book: ");
         Set<String> books = ValidData
-                .continiouslyTyping("Type in at least one author. Enter \"exit\" for quit");
+                .continiouslyTyping("Type in at least one author who wrote"
+                        + " this book. Enter \"exit\" for quit");
         aas.addBook(bookName, books);
     }
 
