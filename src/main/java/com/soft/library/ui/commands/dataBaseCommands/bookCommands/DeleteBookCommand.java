@@ -1,5 +1,8 @@
 package com.soft.library.ui.commands.dataBaseCommands.bookCommands;
 
+import com.soft.library.dataBase.service.AdvAuthorService;
+import com.soft.library.dataBase.service.AdvBookService;
+import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
 /**
@@ -8,9 +11,8 @@ import com.soft.library.ui.commandCore.Command;
 public class DeleteBookCommand implements Command {
     @Override
     public void execute() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Enter title:");
-//        AdvBookService.deleteBook(scanner.nextLine());
+        System.out.println("Enter book title:");
+        new AdvBookService().deleteBook(ValidData.getWords());
     }
        
     @Override

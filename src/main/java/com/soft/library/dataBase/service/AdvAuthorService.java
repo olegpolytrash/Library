@@ -5,16 +5,15 @@ package com.soft.library.dataBase.service;
 
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+
+import com.soft.library.dataBase.dao.AuthorDAO;
+import com.soft.library.dataBase.dao.BookDAO;
 import com.soft.library.dataBase.dao.impl.AuthorDAOImpl;
 import com.soft.library.dataBase.dao.impl.BookDAOImpl;
 import com.soft.library.dataBase.dataBaseCore.JPAUtil;
 import com.soft.library.dataBase.model.Author;
 import com.soft.library.dataBase.model.Book;
-import com.soft.library.dataBase.dao.AuthorDAO;
-import com.soft.library.dataBase.dao.BaseDao;
-import com.soft.library.dataBase.dao.BookDAO;
-
-import javax.persistence.EntityManager;
 
 /**
  * @author rd
@@ -30,15 +29,12 @@ public class AdvAuthorService {
         // initialize DAO
         AuthorDAO authorDAO = new AuthorDAOImpl(entityManager);
         BookDAO bookDAO = new BookDAOImpl(entityManager);
-
         Author author = new Author();
         author.setName(title);
-        
-
         Contributors con = new Contributors();
-        author.setBooks(con.getContributors(books, bookDAO));
-        
+        author.setBooks(con.getBooks(books, bookDAO));
         authorDAO.save(author);
+        
         // close
         entityManager.getTransaction().commit();
     }
