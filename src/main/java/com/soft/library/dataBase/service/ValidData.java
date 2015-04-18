@@ -18,7 +18,7 @@ public class ValidData {
      *
      */
     @SuppressWarnings("resource")
-    public static String getString() {
+    public static String getWords() {
 
         String regx = "^[a-zA-Z\\s]{3,}$";
         Scanner sc = new Scanner(System.in);
@@ -35,7 +35,7 @@ public class ValidData {
      *
      */
     @SuppressWarnings("resource")
-    public static int getInteger() {
+    public static int getDigit() {
         String regx = "^\\s*\\d{1}\\s*$";
         Scanner sc = new Scanner(System.in);
         String result = "";
