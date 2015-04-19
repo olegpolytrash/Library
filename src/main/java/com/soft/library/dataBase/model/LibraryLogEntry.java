@@ -13,12 +13,16 @@ import java.sql.Date;
 public class LibraryLogEntry {
     @Id @GeneratedValue
     private Integer id;
+    
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Book book;
+    
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Reader reader;
+    
     @Column(nullable = false)
     private Date taken;
+    
     @Column(nullable = false)
     private Date returned;
 

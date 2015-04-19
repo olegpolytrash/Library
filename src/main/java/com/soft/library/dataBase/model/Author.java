@@ -15,6 +15,7 @@ import java.util.Set;
 public class Author {
     @Id @GeneratedValue
     private Integer id;
+    
     @Column(nullable = false, unique = true)
     private String name;
     

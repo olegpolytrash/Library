@@ -25,7 +25,7 @@ public class AdvBookService {
         Book book = new Book();
         book.setName(title);
         Contributors con = new Contributors();
-        book.setAuthors(con.getAuthors(authors, authorDAO));
+        book.setAuthors(con.getAuthor(authors, authorDAO));
         bookDAO.save(book);
         
         // close

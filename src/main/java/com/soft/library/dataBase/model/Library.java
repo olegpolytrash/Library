@@ -12,13 +12,18 @@ import javax.persistence.*;
 public class Library {
     @Id @GeneratedValue
     private Integer id;
+    
     private Integer pages;
+    
     @Column(nullable = false)
     private Integer year;
+    
     @Column(nullable = false)
     private Integer quantity;
+    
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Book book;
+    
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Publisher publisher;
 

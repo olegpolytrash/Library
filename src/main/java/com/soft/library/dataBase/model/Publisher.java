@@ -15,6 +15,7 @@ import javax.persistence.Id;
 public class Publisher {
     @Id @GeneratedValue
     private Integer id;
+    
     @Column(nullable = false, unique = true)
     private String name;
 
