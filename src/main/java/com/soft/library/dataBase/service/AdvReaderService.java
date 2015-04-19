@@ -31,8 +31,7 @@ public class AdvReaderService {
         entityManager.getTransaction().commit();
     }
 
-    public int updateReaderBDate(String oldBDate, String newBDate,
-            String oldSecName, String newSecName) {
+    public int updateReaderBDate(String oldBDate, String newBDate) {
         
         // prepare
         EntityManager entityManager = JPAUtil.getEntityManagerFactory()
