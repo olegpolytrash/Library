@@ -1,31 +1,27 @@
 package com.soft.library.dataBase.service;
 
-import java.sql.Date;
-import java.util.Set;
+import com.soft.library.dataBase.dao.ReaderDao;
+import com.soft.library.dataBase.dao.shared.ReaderDaoShared;
+import com.soft.library.dataBase.dataBaseCore.JpaUtil;
+import com.soft.library.dataBase.model.Reader;
 
 import javax.persistence.EntityManager;
-
-import com.soft.library.dataBase.dao.ReaderDAO;
-import com.soft.library.dataBase.dao.BookDAO;
-import com.soft.library.dataBase.dao.impl.ReaderDAOImpl;
-import com.soft.library.dataBase.dao.impl.BookDAOImpl;
-import com.soft.library.dataBase.dataBaseCore.JPAUtil;
-import com.soft.library.dataBase.model.Reader;
+import java.sql.Date;
 
 public class ReaderService {
     public void addReader(String name, String surname, String mobilePhone,
             String address, Date birthDate) {
         
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        ReaderDAO readerDAO = new ReaderDAOImpl(entityManager);
+        ReaderDao readerDao = new ReaderDaoShared(entityManager);
         Reader reader = new Reader(name, surname, mobilePhone, address,
                 birthDate);
-        reader = readerDAO.saveEntity(reader);
+        reader = readerDao.saveEntity(reader);
 
         // close
         entityManager.getTransaction().commit();
@@ -34,18 +30,18 @@ public class ReaderService {
     public int updateReaderBDate(String oldBDate, String newBDate) {
         
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
         
         // initialize DAO
-        ReaderDAO readerDAO = new ReaderDAOImpl(entityManager);
+        ReaderDao readerDao = new ReaderDaoShared(entityManager);
         
         int count = 0;
-        for (Reader a : readerDAO.getAll()) {
+        for (Reader a : readerDao.getAll()) {
             if (a.getBirthDate().equals(Date.valueOf(oldBDate))) {
                 a.setBirthDate(Date.valueOf(newBDate));
-                a = readerDAO.saveEntity(a);
+                a = readerDao.saveEntity(a);
                 count++;
             }
         }
@@ -59,20 +55,20 @@ public class ReaderService {
             String oldSecName, String newSecName) {
         
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        ReaderDAO readerDAO = new ReaderDAOImpl(entityManager);
+        ReaderDao readerDao = new ReaderDaoShared(entityManager);
 
         int count = 0;
-        for (Reader a : readerDAO.getAll()) {
+        for (Reader a : readerDao.getAll()) {
             if (a.getName().equals(oldFirstName)
                     && a.getSurname().equals(oldSecName)) {
                 a.setName(newFirstName);
                 a.setSurname(newSecName);
-                a = readerDAO.saveEntity(a);
+                a = readerDao.saveEntity(a);
                 count++;
             }
         }
@@ -85,18 +81,18 @@ public class ReaderService {
 
     public int updateReaderMobile(String oldMobile, String newMobile) {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        ReaderDAO readerDAO = new ReaderDAOImpl(entityManager);
+        ReaderDao readerDao = new ReaderDaoShared(entityManager);
 
         int count = 0;
-        for (Reader a : readerDAO.getAll()) {
+        for (Reader a : readerDao.getAll()) {
             if (a.getMobilePhone().equals(oldMobile)) {
                 a.setMobilePhone(newMobile);
-                a = readerDAO.saveEntity(a);
+                a = readerDao.saveEntity(a);
                 count++;
             }
         }
@@ -109,18 +105,18 @@ public class ReaderService {
 
     public int updateReaderAddress(String oldAddress, String newAddress) {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        ReaderDAO readerDAO = new ReaderDAOImpl(entityManager);
+        ReaderDao readerDao = new ReaderDaoShared(entityManager);
 
         int count = 0;
-        for (Reader a : readerDAO.getAll()) {
+        for (Reader a : readerDao.getAll()) {
             if (a.getAddress().equals(oldAddress)) {
                 a.setAddress(newAddress);
-                a = readerDAO.saveEntity(a);
+                a = readerDao.saveEntity(a);
                 count++;
             }
         }
@@ -133,16 +129,16 @@ public class ReaderService {
 
     public void printReaders() {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        ReaderDAO readerDAO = new ReaderDAOImpl(entityManager);
+        ReaderDao readerDao = new ReaderDaoShared(entityManager);
 
         System.out.println("\nAll Readers:");
-        for (Reader a : readerDAO.getAll()) {
-            System.out.println("readerDAO: id=" + a.getId() + " Title="
+        for (Reader a : readerDao.getAll()) {
+            System.out.println("readerDao: id=" + a.getId() + " Title="
                     + a.getName());
         }
 
@@ -152,14 +148,14 @@ public class ReaderService {
 
     public Reader getReaderById(int readerDAOId) {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        ReaderDAO readerDAO = new ReaderDAOImpl(entityManager);
+        ReaderDao readerDao = new ReaderDaoShared(entityManager);
 
-        Reader reader = readerDAO.findById(readerDAOId);
+        Reader reader = readerDao.findById(readerDAOId);
 
         // close
         entityManager.getTransaction().commit();
@@ -169,16 +165,16 @@ public class ReaderService {
 
     public void deleteReader(String name) {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        ReaderDAO readerDAO = new ReaderDAOImpl(entityManager);
+        ReaderDao readerDao = new ReaderDaoShared(entityManager);
 
-        for (Reader a : readerDAO.getAll()) {
+        for (Reader a : readerDao.getAll()) {
             if (a.getName().equalsIgnoreCase(name)) {
-                readerDAO.remove(a);
+                readerDao.remove(a);
                 break;
             }
         }

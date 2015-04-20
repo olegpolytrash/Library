@@ -1,10 +1,10 @@
 package com.soft.library.ui.commands.dataBaseCommands.bookCommands;
 
-import java.util.Set;
-
 import com.soft.library.dataBase.service.BookService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
+
+import java.util.Set;
 
 /**
  * Created by Oleg on 09.04.2015.

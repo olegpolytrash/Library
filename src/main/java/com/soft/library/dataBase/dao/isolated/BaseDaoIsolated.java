@@ -2,12 +2,12 @@ package com.soft.library.dataBase.dao.isolated;
 
 import com.soft.library.dataBase.dao.BaseDao;
 import com.soft.library.dataBase.dataBaseCore.JpaUtil;
-import com.soft.library.dataBase.model.StandardDbEntity;
+import com.soft.library.dataBase.model.StandardEntity;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class BaseDaoIsolated<E extends StandardDbEntity> implements BaseDao<E> {
+public class BaseDaoIsolated<E extends StandardEntity> implements BaseDao<E> {
     private Class<E> elementClass;
 
     public BaseDaoIsolated(Class<E> elementClass) {

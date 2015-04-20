@@ -1,12 +1,12 @@
 package com.soft.library.dataBase.dao.shared;
 
 import com.soft.library.dataBase.dao.BaseDao;
-import com.soft.library.dataBase.model.StandardDbEntity;
+import com.soft.library.dataBase.model.StandardEntity;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class BaseDaoShared<E extends StandardDbEntity> implements BaseDao<E> {
+public class BaseDaoShared<E extends StandardEntity> implements BaseDao<E> {
     private Class<E> elementClass;
 
     public BaseDaoShared(Class<E> elementClass, EntityManager entityManager) {

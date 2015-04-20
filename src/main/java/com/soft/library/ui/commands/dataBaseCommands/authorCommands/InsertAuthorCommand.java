@@ -1,13 +1,10 @@
 package com.soft.library.ui.commands.dataBaseCommands.authorCommands;
 
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
-
-import com.soft.library.dataBase.model.Book;
 import com.soft.library.dataBase.service.AuthorService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
+
+import java.util.Set;
 
 /**
  * Created by Oleg on 09.04.2015.

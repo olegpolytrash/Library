@@ -3,16 +3,15 @@
  */
 package com.soft.library.dataBase.service;
 
-import java.util.Set;
+import com.soft.library.dataBase.dao.AuthorDao;
+import com.soft.library.dataBase.dao.BookDao;
+import com.soft.library.dataBase.dao.shared.AuthorDaoShared;
+import com.soft.library.dataBase.dao.shared.BookDaoShared;
+import com.soft.library.dataBase.dataBaseCore.JpaUtil;
+import com.soft.library.dataBase.model.Author;
 
 import javax.persistence.EntityManager;
-
-import com.soft.library.dataBase.dao.AuthorDAO;
-import com.soft.library.dataBase.dao.BookDAO;
-import com.soft.library.dataBase.dao.impl.AuthorDAOImpl;
-import com.soft.library.dataBase.dao.impl.BookDAOImpl;
-import com.soft.library.dataBase.dataBaseCore.JPAUtil;
-import com.soft.library.dataBase.model.Author;
+import java.util.Set;
 
 /**
  * @author rd
@@ -21,18 +20,18 @@ import com.soft.library.dataBase.model.Author;
 public class AuthorService {
     public void addAuthor(String title, Set<String> books) {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        AuthorDAO authorDAO = new AuthorDAOImpl(entityManager);
-        BookDAO bookDAO = new BookDAOImpl(entityManager);
+        AuthorDao authorDao = new AuthorDaoShared(entityManager);
+        BookDao bookDao = new BookDaoShared(entityManager);
         Author author = new Author();
         author.setName(title);
         Contributors con = new Contributors();
-        author.setBooks(con.getBook(books, bookDAO));
-        author = authorDAO.saveEntity(author);
+        author.setBooks(con.getBook(books, bookDao));
+        author = authorDao.saveEntity(author);
         
         // close
         entityManager.getTransaction().commit();
@@ -40,18 +39,18 @@ public class AuthorService {
 
     public int updateAuthors(String oldName, String newName) {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        AuthorDAO authorDAO = new AuthorDAOImpl(entityManager);
+        AuthorDao authorDao = new AuthorDaoShared(entityManager);
 
         int count = 0;
-        for (Author a : authorDAO.getAll()) {
+        for (Author a : authorDao.getAll()) {
             if (a.getName().equals(oldName)) {
                 a.setName(newName);
-                a = authorDAO.saveEntity(a);
+                a = authorDao.saveEntity(a);
                 count++;
             }
         }
@@ -64,16 +63,16 @@ public class AuthorService {
 
     public void printAuthors() {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        AuthorDAO authorDAO = new AuthorDAOImpl(entityManager);
+        AuthorDao authorDao = new AuthorDaoShared(entityManager);
 
         System.out.println("\nAll Authors:");
-        for (Author a : authorDAO.getAll()) {
-            System.out.println("authorDAO: id=" + a.getId() + " Title="
+        for (Author a : authorDao.getAll()) {
+            System.out.println("authorDao: id=" + a.getId() + " Title="
                     + a.getName());
         }
 
@@ -83,14 +82,14 @@ public class AuthorService {
 
     public Author getAuthorById(int authorDAOId) {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        AuthorDAO authorDAO = new AuthorDAOImpl(entityManager);
+        AuthorDao authorDao = new AuthorDaoShared(entityManager);
 
-        Author author = authorDAO.findById(authorDAOId);
+        Author author = authorDao.findById(authorDAOId);
 
         // close
         entityManager.getTransaction().commit();
@@ -100,16 +99,16 @@ public class AuthorService {
 
     public void deleteAuthor(String name) {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        AuthorDAO authorDAO = new AuthorDAOImpl(entityManager);
+        AuthorDao authorDao = new AuthorDaoShared(entityManager);
 
-        for (Author a : authorDAO.getAll()) {
+        for (Author a : authorDao.getAll()) {
             if (a.getName().equalsIgnoreCase(name)) {
-                authorDAO.remove(a);
+                authorDao.remove(a);
                 break;
             }
         }

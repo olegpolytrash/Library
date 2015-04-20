@@ -1,6 +1,6 @@
 package com.soft.library;
 
-import com.soft.library.ui.menus.MainMenu;
+import com.soft.library.ui.menuCreators.MainMenu;
 
 /**
  * Class for running application

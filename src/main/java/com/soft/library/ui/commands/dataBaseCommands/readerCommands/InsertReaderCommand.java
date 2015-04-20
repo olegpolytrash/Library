@@ -1,11 +1,11 @@
 package com.soft.library.ui.commands.dataBaseCommands.readerCommands;
 
-import java.sql.Date;
-import java.util.Scanner;
-
 import com.soft.library.dataBase.service.ReaderService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
+
+import java.sql.Date;
+import java.util.Scanner;
 
 /**
  * Created by Oleg on 09.04.2015.

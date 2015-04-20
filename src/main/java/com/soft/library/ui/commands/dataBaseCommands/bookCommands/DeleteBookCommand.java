@@ -1,6 +1,5 @@
 package com.soft.library.ui.commands.dataBaseCommands.bookCommands;
 
-import com.soft.library.dataBase.service.AuthorService;
 import com.soft.library.dataBase.service.BookService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;

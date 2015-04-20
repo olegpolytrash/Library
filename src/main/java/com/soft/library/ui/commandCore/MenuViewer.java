@@ -19,7 +19,7 @@ public class MenuViewer {
     }
 
     private void addExitMenuOptionIfAbsent() {
-        Iterator<Map.Entry<Integer, IMenuOption>> iterator = commandCollection.getCommands().iterator();
+        Iterator<Map.Entry<Integer, MenuOption>> iterator = commandCollection.getCommands().iterator();
 
         boolean contains = false;
 
@@ -37,7 +37,7 @@ public class MenuViewer {
 
     private void printEntryMessages() {
         StringBuilder messageBuilder = new StringBuilder();
-        for (Map.Entry<Integer, IMenuOption> pair : commandCollection.getCommands()) {
+        for (Map.Entry<Integer, MenuOption> pair : commandCollection.getCommands()) {
             messageBuilder.append(pair.getKey());
             messageBuilder.append(": ");
             messageBuilder.append(pair.getValue().getName());
@@ -49,7 +49,7 @@ public class MenuViewer {
         System.out.println();
     }
 
-    public void runApplication() {
+    public void showMenu() {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -57,7 +57,7 @@ public class MenuViewer {
             int programType = scanner.nextInt();
 
             if (programType > MIN_MENU_INDEX && programType < (commandCollection.getSize() + 1)) {
-                IMenuOption menuOption = commandCollection.getByIndex(programType);
+                MenuOption menuOption = commandCollection.getByIndex(programType);
 
                 if (menuOption instanceof ExitMenuCommand) {
                     break;

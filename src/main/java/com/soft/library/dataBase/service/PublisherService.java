@@ -3,12 +3,12 @@
  */
 package com.soft.library.dataBase.service;
 
-import javax.persistence.EntityManager;
-
-import com.soft.library.dataBase.dao.PublisherDAO;
-import com.soft.library.dataBase.dao.impl.PublisherDAOImpl;
-import com.soft.library.dataBase.dataBaseCore.JPAUtil;
+import com.soft.library.dataBase.dao.PublisherDao;
+import com.soft.library.dataBase.dao.shared.PublisherDaoShared;
+import com.soft.library.dataBase.dataBaseCore.JpaUtil;
 import com.soft.library.dataBase.model.Publisher;
+
+import javax.persistence.EntityManager;
 
 /**
  * @publisher rd
@@ -17,15 +17,15 @@ import com.soft.library.dataBase.model.Publisher;
 public class PublisherService {
     public void addPublisher(String name) {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        PublisherDAO publisherDAO = new PublisherDAOImpl(entityManager);
+        PublisherDao publisherDao = new PublisherDaoShared(entityManager);
         Publisher publisher = new Publisher();
         publisher.setName(name);
-        publisher = publisherDAO.saveEntity(publisher);
+        publisher = publisherDao.saveEntity(publisher);
         
         // close
         entityManager.getTransaction().commit();
@@ -33,18 +33,18 @@ public class PublisherService {
 
     public int updatePublishers(String oldName, String newName) {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        PublisherDAO publisherDAO = new PublisherDAOImpl(entityManager);
+        PublisherDao publisherDao = new PublisherDaoShared(entityManager);
 
         int count = 0;
-        for (Publisher a : publisherDAO.getAll()) {
+        for (Publisher a : publisherDao.getAll()) {
             if (a.getName().equals(oldName)) {
                 a.setName(newName);
-                a = publisherDAO.saveEntity(a);
+                a = publisherDao.saveEntity(a);
                 count++;
             }
         }
@@ -57,16 +57,16 @@ public class PublisherService {
 
     public void printPublishers() {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        PublisherDAO publisherDAO = new PublisherDAOImpl(entityManager);
+        PublisherDao publisherDao = new PublisherDaoShared(entityManager);
 
         System.out.println("\nAll Publishers:");
-        for (Publisher a : publisherDAO.getAll()) {
-            System.out.println("publisherDAO: id=" + a.getId() + " Title="
+        for (Publisher a : publisherDao.getAll()) {
+            System.out.println("publisherDao: id=" + a.getId() + " Title="
                     + a.getName());
         }
 
@@ -76,14 +76,14 @@ public class PublisherService {
 
     public Publisher getPublisherById(int publisherDAOId) {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        PublisherDAO publisherDAO = new PublisherDAOImpl(entityManager);
+        PublisherDao publisherDao = new PublisherDaoShared(entityManager);
 
-        Publisher publisher = publisherDAO.findById(publisherDAOId);
+        Publisher publisher = publisherDao.findById(publisherDAOId);
 
         // close
         entityManager.getTransaction().commit();
@@ -93,16 +93,16 @@ public class PublisherService {
 
     public void deletePublisher(String name) {
         // prepare
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        PublisherDAO publisherDAO = new PublisherDAOImpl(entityManager);
+        PublisherDao publisherDao = new PublisherDaoShared(entityManager);
 
-        for (Publisher a : publisherDAO.getAll()) {
+        for (Publisher a : publisherDao.getAll()) {
             if (a.getName().equalsIgnoreCase(name)) {
-                publisherDAO.remove(a);
+                publisherDao.remove(a);
                 break;
             }
         }

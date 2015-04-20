@@ -1,8 +1,9 @@
 package com.soft.library.dataBase.dataBaseCore;
 
-import javax.persistence.*;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
-public class JPAUtil {
+public class JpaUtil {
 
     private static final EntityManagerFactory emf = buildEntityManagerFactor();
 

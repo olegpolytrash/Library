@@ -1,11 +1,11 @@
 package com.soft.library.dataBase.dao;
 
-import com.soft.library.dataBase.model.StandardDbEntity;
+import com.soft.library.dataBase.model.StandardEntity;
 
 import java.util.List;
 
 
-public interface BaseDao  <E extends StandardDbEntity> {
+public interface BaseDao  <E extends StandardEntity> {
     E findById(int id);
 
     /**
