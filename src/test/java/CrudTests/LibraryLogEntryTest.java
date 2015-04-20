@@ -1,8 +1,7 @@
-package authorTest;
+package CrudTests;
 
-import com.soft.library.dataBase.dao.LibraryDAO;
-import com.soft.library.dataBase.dao.oneOp.*;
-import com.soft.library.dataBase.dataBaseCore.JPAUtil;
+import com.soft.library.dataBase.dao.isolated.*;
+import com.soft.library.dataBase.dataBaseCore.JpaUtil;
 import com.soft.library.dataBase.model.*;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
@@ -25,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 public class LibraryLogEntryTest {
 
     public LibraryLogEntryTest() {
-        JPAUtil.getEntityManagerFactory();
+        JpaUtil.getEntityManagerFactory();
     }
 
     private static IDatabaseTester databaseTester;
@@ -57,21 +56,21 @@ public class LibraryLogEntryTest {
     public void tear() throws Exception {
         DatabaseOperation.CLEAN_INSERT.execute(databaseTester.getConnection(), dataSet);
 
-        p1 = new PublisherDAO().findById(1);
-        p2 = new PublisherDAO().findById(2);
-        p3 = new PublisherDAO().findById(3);
+        p1 = new PublisherDaoIsolated().findById(1);
+        p2 = new PublisherDaoIsolated().findById(2);
+        p3 = new PublisherDaoIsolated().findById(3);
 
-        b1 = new BookDAO().findById(1);
-        b2 = new BookDAO().findById(2);
-        b3 = new BookDAO().findById(3);
+        b1 = new BookDaoIsolated().findById(1);
+        b2 = new BookDaoIsolated().findById(2);
+        b3 = new BookDaoIsolated().findById(3);
 
-        a1 = new AuthorDAO().findById(1);
-        a2 = new AuthorDAO().findById(2);
-        a3 = new AuthorDAO().findById(3);
+        a1 = new AuthorDaoIsolated().findById(1);
+        a2 = new AuthorDaoIsolated().findById(2);
+        a3 = new AuthorDaoIsolated().findById(3);
 
-        r1 = new ReaderDAO().findById(1);
-        r2 = new ReaderDAO().findById(2);
-        r3 = new ReaderDAO().findById(3);
+        r1 = new ReaderDaoIsolated().findById(1);
+        r2 = new ReaderDaoIsolated().findById(2);
+        r3 = new ReaderDaoIsolated().findById(3);
     }
 
     Publisher p1;
@@ -89,7 +88,7 @@ public class LibraryLogEntryTest {
 
     @Test
     public void testInsert() {
-        LibraryLogEntryDAO libraryLogEntryDAO = new LibraryLogEntryDAO();
+        LibraryLogEntryDaoIsolated libraryLogEntryDAO = new LibraryLogEntryDaoIsolated();
 
         LibraryLogEntry libraryLogEntry1 = new LibraryLogEntry(b1, r1, new Date(123123), new Date(345345));
         LibraryLogEntry libraryLogEntry2 = new LibraryLogEntry(b2, r2, new Date(123123), new Date(345345));
@@ -110,7 +109,7 @@ public class LibraryLogEntryTest {
 
     @Test
     public void getAll() {
-        LibraryLogEntryDAO libraryLogEntryDAO = new LibraryLogEntryDAO();
+        LibraryLogEntryDaoIsolated libraryLogEntryDAO = new LibraryLogEntryDaoIsolated();
 
         List<LibraryLogEntry> logs = Arrays.asList(new LibraryLogEntry(b1, r1, new Date(123123), new Date(345345)),
                 new LibraryLogEntry(b2, r2, new Date(123123), new Date(345345)),
@@ -125,7 +124,7 @@ public class LibraryLogEntryTest {
 
     @Test
     public void remove() {
-        LibraryLogEntryDAO libraryLogEntryDAO = new LibraryLogEntryDAO();
+        LibraryLogEntryDaoIsolated libraryLogEntryDAO = new LibraryLogEntryDaoIsolated();
 
         List<LibraryLogEntry> logs = Arrays.asList(new LibraryLogEntry(b1, r1, new Date(123123), new Date(345345)),
                 new LibraryLogEntry(b2, r2, new Date(123123), new Date(345345)),
@@ -142,7 +141,7 @@ public class LibraryLogEntryTest {
 
     @Test
     public void update() {
-        LibraryLogEntryDAO libraryLogEntryDAO = new LibraryLogEntryDAO();
+        LibraryLogEntryDaoIsolated libraryLogEntryDAO = new LibraryLogEntryDaoIsolated();
 
         LibraryLogEntry libraryLogEntry1 = new LibraryLogEntry(b1, r1, new Date(123123), new Date(345345));
         libraryLogEntry1 = libraryLogEntryDAO.saveEntity(libraryLogEntry1);

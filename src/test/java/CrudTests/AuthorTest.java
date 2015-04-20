@@ -1,8 +1,10 @@
-package authorTest;
+package CrudTests;
 
-import com.soft.library.dataBase.dao.AuthorDAO;
-import com.soft.library.dataBase.dao.impl.AuthorDAOImpl;
-import com.soft.library.dataBase.dataBaseCore.JPAUtil;
+import com.soft.library.dataBase.dao.AuthorDao;
+import com.soft.library.dataBase.dao.isolated.AuthorDaoIsolated;
+import com.soft.library.dataBase.dao.isolated.BookDaoIsolated;
+import com.soft.library.dataBase.dao.shared.AuthorDaoShared;
+import com.soft.library.dataBase.dataBaseCore.JpaUtil;
 import com.soft.library.dataBase.model.Author;
 import com.soft.library.dataBase.model.Book;
 import org.dbunit.IDatabaseTester;
@@ -28,7 +30,7 @@ import static org.junit.Assert.assertTrue;
 public class AuthorTest {
 
     public AuthorTest() {
-        JPAUtil.getEntityManagerFactory();
+        JpaUtil.getEntityManagerFactory();
     }
 
     private static IDatabaseTester databaseTester;
@@ -88,16 +90,16 @@ public class AuthorTest {
 
     @Test
     public void testSave() {
-        AuthorDAO authorDAO = new com.soft.library.dataBase.dao.oneOp.AuthorDAO();
-        Set<Book> books = new HashSet<>(  new com.soft.library.dataBase.dao.oneOp.BookDAO().getAll() );
+        AuthorDao authorDao = new AuthorDaoIsolated();
+        Set<Book> books = new HashSet<>(  new BookDaoIsolated().getAll() );
 
         // create and saveNewEntity an author
         Author originalAuthor = new Author("test");
         originalAuthor.setBooks(books);
-        originalAuthor = authorDAO.saveEntity(originalAuthor);
+        originalAuthor = authorDao.saveEntity(originalAuthor);
 
         // find the author in the db
-        Author authorFromBD = authorDAO.findById(originalAuthor.getId());
+        Author authorFromBD = authorDao.findById(originalAuthor.getId());
 
         // check if the correct author was found
         assertTrue(isEqual(authorFromBD, originalAuthor, true));
@@ -105,97 +107,97 @@ public class AuthorTest {
 
     @Test
     public void testUpdateObjectInDifferentTransactions() {
-        AuthorDAO authorDAO = new com.soft.library.dataBase.dao.oneOp.AuthorDAO();
-        Set<Book> books = new HashSet<>(  new com.soft.library.dataBase.dao.oneOp.BookDAO().getAll() );
+        AuthorDao authorDao = new AuthorDaoIsolated();
+        Set<Book> books = new HashSet<>(  new BookDaoIsolated().getAll() );
 
         // add an author to the db
         Author originalAuthor = new Author("test");
         originalAuthor.setBooks(books);
-        originalAuthor = authorDAO.saveEntity(originalAuthor);
+        originalAuthor = authorDao.saveEntity(originalAuthor);
 
         // make a change in author and update db
         originalAuthor.setName("author new name");
-        originalAuthor = authorDAO.saveEntity(originalAuthor);
+        originalAuthor = authorDao.saveEntity(originalAuthor);
 
         // check if update was successful
-        Author author = authorDAO.findById(originalAuthor.getId());
+        Author author = authorDao.findById(originalAuthor.getId());
         assertTrue(isEqual(author, originalAuthor, true));
     }
 
     @Test
     public void testUpdateObjectInOneTransactionn() {
-        AuthorDAO authorDAO = new com.soft.library.dataBase.dao.oneOp.AuthorDAO();
-        Set<Book> books = new HashSet<>(  new com.soft.library.dataBase.dao.oneOp.BookDAO().getAll() );
+        AuthorDao authorDao = new AuthorDaoIsolated();
+        Set<Book> books = new HashSet<>(  new BookDaoIsolated().getAll() );
 
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory().createEntityManager();
         entityManager.getTransaction().begin();
 
         // add an author to the db
         Author originalAuthor = new Author("test", books);
-        originalAuthor = authorDAO.saveEntity(originalAuthor);
+        originalAuthor = authorDao.saveEntity(originalAuthor);
 
-        AuthorDAO authorDAO2 = new AuthorDAOImpl(entityManager);
+        AuthorDao authorDao2 = new AuthorDaoShared(entityManager);
 
         // change name of a detached object and update it
         originalAuthor.setName("test new name");
-        originalAuthor = authorDAO2.saveEntity(originalAuthor);
+        originalAuthor = authorDao2.saveEntity(originalAuthor);
 
         entityManager.getTransaction().commit();
 
         // get the updated author from bd and check if the name was updated
-        Author authorByID = authorDAO.findById(originalAuthor.getId());
+        Author authorByID = authorDao.findById(originalAuthor.getId());
         assertTrue(isEqual(authorByID, originalAuthor, true));
     }
 
     @Test
     public void testGetAll() {
-        AuthorDAO authorDAO = new com.soft.library.dataBase.dao.oneOp.AuthorDAO();
-        Set<Book> books = new HashSet<>(  new com.soft.library.dataBase.dao.oneOp.BookDAO().getAll() );
+        AuthorDao authorDao = new AuthorDaoIsolated();
+        Set<Book> books = new HashSet<>(  new BookDaoIsolated().getAll() );
 
         // add authors to the database
         Author authors[] = {new Author("test1", books), new Author("test2", books), new Author("test3", books)};
 
         for (int i = 0; i < authors.length; i++) {
-            authors[i] = authorDAO.saveEntity(authors[i]);
+            authors[i] = authorDao.saveEntity(authors[i]);
         }
 
         // check if all authors were selected
-        assertEquals(authors.length, authorDAO.getAll().size());
-        assertTrue(authorDAO.getAll().equals(Arrays.asList(authors)));
+        assertEquals(authors.length, authorDao.getAll().size());
+        assertTrue(authorDao.getAll().equals(Arrays.asList(authors)));
     }
 
     @Test
     public void testRemove() {
-        AuthorDAO authorDAO = new com.soft.library.dataBase.dao.oneOp.AuthorDAO();
-        Set<Book> books = new HashSet<>(  new com.soft.library.dataBase.dao.oneOp.BookDAO().getAll() );
+        AuthorDao authorDao = new AuthorDaoIsolated();
+        Set<Book> books = new HashSet<>(  new BookDaoIsolated().getAll() );
 
         // add authors to the database
         Author authors[] = {new Author("test1", books), new Author("test2", books), new Author("test3", books)};
 
         for (int i = 0; i < authors.length; i++) {
-            authors[i] = authorDAO.saveEntity(authors[i]);
+            authors[i] = authorDao.saveEntity(authors[i]);
         }
 
         // remove an author
-        authorDAO.remove(authors[1]);
+        authorDao.remove(authors[1]);
 
         // check if the author was removed
-        Author a = authorDAO.findById(authors[1].getId());
+        Author a = authorDao.findById(authors[1].getId());
 
         assertEquals(null, a);
     }
 
     @Test
     public void testFindByID() {
-        AuthorDAO authorDAO = new com.soft.library.dataBase.dao.oneOp.AuthorDAO();
-        Set<Book> books = new HashSet<>(  new com.soft.library.dataBase.dao.oneOp.BookDAO().getAll() );
+        AuthorDao authorDao = new AuthorDaoIsolated();
+        Set<Book> books = new HashSet<>(  new BookDaoIsolated().getAll() );
 
         // add an author to the db
         Author originalAuthor = new Author("test", books);
-        originalAuthor = authorDAO.saveEntity(originalAuthor);
+        originalAuthor = authorDao.saveEntity(originalAuthor);
 
         // find an author by id
-        Author authorFromBD = authorDAO.findById(originalAuthor.getId());
+        Author authorFromBD = authorDao.findById(originalAuthor.getId());
 
         // check
         assertTrue(isEqual(authorFromBD, originalAuthor, true));

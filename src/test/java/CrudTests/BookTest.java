@@ -1,7 +1,9 @@
-package authorTest;
+package CrudTests;
 
-import com.soft.library.dataBase.dao.BookDAO;
-import com.soft.library.dataBase.dataBaseCore.JPAUtil;
+import com.soft.library.dataBase.dao.BookDao;
+import com.soft.library.dataBase.dao.isolated.AuthorDaoIsolated;
+import com.soft.library.dataBase.dao.isolated.BookDaoIsolated;
+import com.soft.library.dataBase.dataBaseCore.JpaUtil;
 import com.soft.library.dataBase.model.Author;
 import com.soft.library.dataBase.model.Book;
 import org.dbunit.IDatabaseTester;
@@ -39,7 +41,7 @@ public class BookTest {
     }
 
     public BookTest() {
-        JPAUtil.getEntityManagerFactory();
+        JpaUtil.getEntityManagerFactory();
     }
 
     static boolean isEqual(Book o1, Book o2, boolean checkAuthors) {
@@ -76,15 +78,15 @@ public class BookTest {
 
     @Test
     public void testSave() {
-        BookDAO bookDAO = new com.soft.library.dataBase.dao.oneOp.BookDAO();
-        Set<Author> authors = new HashSet<>(  new com.soft.library.dataBase.dao.oneOp.AuthorDAO().getAll() );
+        BookDao bookDao = new BookDaoIsolated();
+        Set<Author> authors = new HashSet<>(  new AuthorDaoIsolated().getAll() );
 
         // create and saveNewEntity a book
         Book originalBook = new Book("test", authors);
-        originalBook = bookDAO.saveEntity(originalBook);
+        originalBook = bookDao.saveEntity(originalBook);
 
         // find the book in the db
-        Book bookFromBD = bookDAO.findById(originalBook.getId());
+        Book bookFromBD = bookDao.findById(originalBook.getId());
 
         // check if the correct book was found
        assertTrue(isEqual(originalBook, bookFromBD, true));
@@ -92,69 +94,69 @@ public class BookTest {
 
     @Test
     public void testUpdateObjectInOneTransaction() {
-        BookDAO bookDAO = new com.soft.library.dataBase.dao.oneOp.BookDAO();
-        Set<Author> authors = new HashSet<>(  new com.soft.library.dataBase.dao.oneOp.AuthorDAO().getAll() );
+        BookDao bookDao = new BookDaoIsolated();
+        Set<Author> authors = new HashSet<>(  new AuthorDaoIsolated().getAll() );
 
         // add a book to the db
         Book originalBook = new Book("test", authors);
-        originalBook = bookDAO.saveEntity(originalBook);
+        originalBook = bookDao.saveEntity(originalBook);
 
         // make a change in the book and update db
         originalBook.setName("book new name");
-        originalBook = bookDAO.saveEntity(originalBook);
+        originalBook = bookDao.saveEntity(originalBook);
 
         // check if update was successful
-        Book book = bookDAO.findById(originalBook.getId());
+        Book book = bookDao.findById(originalBook.getId());
         assertTrue(isEqual(originalBook, book, true));
     }
 
     @Test
     public void testGetAll() {
-        BookDAO bookDAO = new com.soft.library.dataBase.dao.oneOp.BookDAO();
+        BookDao bookDao = new BookDaoIsolated();
 
         // add books to the db
         Book books[] = {new Book("test1"), new Book("test2"), new Book("test3")};
 
         for (int i = 0; i < books.length; i++) {
-            books[i] = bookDAO.saveEntity(books[i]);
+            books[i] = bookDao.saveEntity(books[i]);
         }
 
         // check if all books were selected
-        assertEquals(books.length, bookDAO.getAll().size());
-        assertTrue(bookDAO.getAll().equals(Arrays.asList(books)));
+        assertEquals(books.length, bookDao.getAll().size());
+        assertTrue(bookDao.getAll().equals(Arrays.asList(books)));
     }
 
     @Test
     public void testRemove() {
-        BookDAO bookDAO = new com.soft.library.dataBase.dao.oneOp.BookDAO();
+        BookDao bookDao = new BookDaoIsolated();
 
         // add a book to the db
         Book books[] = {new Book("test1"), new Book("test2"), new Book("test3")};
 
         for (int i = 0; i < books.length; i++) {
-            books[i] = bookDAO.saveEntity(books[i]);
+            books[i] = bookDao.saveEntity(books[i]);
         }
 
         // remove a book
-        bookDAO.remove(books[1]);
+        bookDao.remove(books[1]);
 
         // check if the book was removed
-        Book a = bookDAO.findById(books[1].getId());
+        Book a = bookDao.findById(books[1].getId());
 
         assertEquals(null, a);
     }
 
     @Test
     public void testFindByID() {
-        BookDAO bookDAO = new com.soft.library.dataBase.dao.oneOp.BookDAO();
+        BookDao bookDao = new BookDaoIsolated();
 
         // add a book to the db
         Book originalBook = new Book();
         originalBook.setName("test");
-        originalBook = bookDAO.saveEntity(originalBook);
+        originalBook = bookDao.saveEntity(originalBook);
 
         // find an book by id
-        Book bookFromBD = bookDAO.findById(originalBook.getId());
+        Book bookFromBD = bookDao.findById(originalBook.getId());
 
         // check
         assertTrue(isEqual(originalBook, bookFromBD, true));

@@ -1,7 +1,8 @@
-package authorTest;
+package CrudTests;
 
-import com.soft.library.dataBase.dao.PublisherDAO;
-import com.soft.library.dataBase.dataBaseCore.JPAUtil;
+import com.soft.library.dataBase.dao.PublisherDao;
+import com.soft.library.dataBase.dao.isolated.PublisherDaoIsolated;
+import com.soft.library.dataBase.dataBaseCore.JpaUtil;
 import com.soft.library.dataBase.model.Publisher;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
@@ -34,7 +35,7 @@ public class PublisherTest {
     }
 
     public PublisherTest() {
-        JPAUtil.getEntityManagerFactory();
+        JpaUtil.getEntityManagerFactory();
     }
 
     @Before
@@ -44,14 +45,14 @@ public class PublisherTest {
 
     @Test
     public void testSave() {
-        PublisherDAO publisherDAO = new com.soft.library.dataBase.dao.oneOp.PublisherDAO();
+        PublisherDao publisherDao = new PublisherDaoIsolated();
 
         // create and saveNewEntity a publisher
         Publisher originalPublisher = new Publisher("test");
-        publisherDAO.saveNewEntity(originalPublisher);
+        publisherDao.saveNewEntity(originalPublisher);
 
         // find the publisher in the db
-        Publisher publisherFromBD = publisherDAO.findById(originalPublisher.getId());
+        Publisher publisherFromBD = publisherDao.findById(originalPublisher.getId());
 
         // check if the correct publisher was found
         assertEquals(publisherFromBD, originalPublisher);
@@ -60,85 +61,85 @@ public class PublisherTest {
 
     @Test
     public void testUpdateObjectInOneTransaction() {
-        PublisherDAO publisherDAO = new com.soft.library.dataBase.dao.oneOp.PublisherDAO();
+        PublisherDao publisherDao = new PublisherDaoIsolated();
 
         // add a publisher to the db
         Publisher originalPublisher = new Publisher("test");
-        publisherDAO.saveNewEntity(originalPublisher);
+        publisherDao.saveNewEntity(originalPublisher);
 
         // make a change in the publisher and update db
         originalPublisher.setName("publisher new name");
-        publisherDAO.saveEntity(originalPublisher);
+        publisherDao.saveEntity(originalPublisher);
 
         // check if update was successful
-        Publisher publisherFromBD = publisherDAO.findById(originalPublisher.getId());
+        Publisher publisherFromBD = publisherDao.findById(originalPublisher.getId());
         assertEquals(publisherFromBD, originalPublisher);
         assertEquals(publisherFromBD.getName(), originalPublisher.getName());
     }
 
     @Test
     public void testUpdateObjectInDifferentTransactions() {
-        PublisherDAO publisherDAO = new com.soft.library.dataBase.dao.oneOp.PublisherDAO();
+        PublisherDao publisherDao = new PublisherDaoIsolated();
 
         // add a publisher to the db
         Publisher originalPublisher = new Publisher("test");
-        publisherDAO.saveNewEntity(originalPublisher);
+        publisherDao.saveNewEntity(originalPublisher);
 
         // change name of the detached object and update it
         originalPublisher.setName("asd");
-        originalPublisher = publisherDAO.saveEntity(originalPublisher);
+        originalPublisher = publisherDao.saveEntity(originalPublisher);
 
         // get the updated publisher from bd and check if the name was updated
-        Publisher publisherFromBD = publisherDAO.findById(originalPublisher.getId());
+        Publisher publisherFromBD = publisherDao.findById(originalPublisher.getId());
         assertEquals(publisherFromBD.getName(), originalPublisher.getName());
     }
 
     @Test
     public void testGetAll() {
-        PublisherDAO publisherDAO = new com.soft.library.dataBase.dao.oneOp.PublisherDAO();
+        PublisherDao publisherDao = new PublisherDaoIsolated();
 
         // add publishers to the db
         Publisher publishers[] = {new Publisher("test1"), new Publisher("test2"), new Publisher("test3")};
 
         for (Publisher publisher : publishers) {
-            publisherDAO.saveNewEntity(publisher);
+            publisherDao.saveNewEntity(publisher);
         }
 
         // check if all publishers were selected
-        assertEquals(publishers.length, publisherDAO.getAll().size());
-        assertTrue(publisherDAO.getAll().equals(Arrays.asList(publishers)));
+        assertEquals(publishers.length, publisherDao.getAll().size());
+        assertTrue(publisherDao.getAll().equals(Arrays.asList(publishers)));
     }
 
     @Test
     public void testRemove() {
-        PublisherDAO publisherDAO = new com.soft.library.dataBase.dao.oneOp.PublisherDAO();
+        PublisherDao publisherDao = new PublisherDaoIsolated();
 
         // add a publisher to the db
         Publisher publishers[] = {new Publisher("test1"), new Publisher("test2"), new Publisher("test3")};
 
         for (Publisher publisher : publishers) {
-            publisherDAO.saveNewEntity(publisher);
+            publisherDao.saveNewEntity(publisher);
         }
 
         // remove a publisher
-        publisherDAO.remove(publishers[1]);
+        publisherDao.remove(publishers[1]);
 
         // check if the publisher was removed
-        Publisher a = publisherDAO.findById(publishers[1].getId());
+        Publisher a = publisherDao.findById(publishers[1].getId());
 
         assertEquals(null, a);
     }
 
     @Test
     public void testFindByID() {
-        PublisherDAO publisherDAO = new com.soft.library.dataBase.dao.oneOp.PublisherDAO();
+        PublisherDao publisherDao = new PublisherDaoIsolated();
 
         // add a publisher to the db
         Publisher originalPublisher = new Publisher("test");
-        publisherDAO.saveNewEntity(originalPublisher);
+        publisherDao.saveNewEntity(originalPublisher);
 
         // find a publisher by id
-        Publisher publisherFromBD = publisherDAO.findById(originalPublisher.getId());
+        Publisher publisherFromBD = publisherDao.findById(originalPublisher.getId());
 
         // check
         assertEquals(publisherFromBD, originalPublisher);
