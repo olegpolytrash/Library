@@ -3,7 +3,7 @@ package com.soft.library.ui.commandCore;
 /**
  * Interface that every menu option must implement
  */
-public interface IMenuOption {
+public interface MenuOption {
     /**
      * Called when the menu option is selected
      */
