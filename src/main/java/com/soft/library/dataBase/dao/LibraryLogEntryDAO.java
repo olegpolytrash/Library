@@ -3,7 +3,7 @@ package com.soft.library.dataBase.dao;
 import com.soft.library.dataBase.model.LibraryLogEntry;
 
 /**
- * Created by Oleg on 17.04.2015.
+ * Interface for the LibraryLogEntry entity methods
  */
 public interface LibraryLogEntryDao extends BaseDao<LibraryLogEntry>{
 

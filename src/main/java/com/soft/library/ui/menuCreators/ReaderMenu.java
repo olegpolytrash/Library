@@ -2,9 +2,12 @@ package com.soft.library.ui.menuCreators;
 
 import com.soft.library.ui.commandCore.CommandCollection;
 import com.soft.library.ui.commandCore.Menu;
-import com.soft.library.ui.commandCore.MenuViewer;
+import com.soft.library.ui.commandCore.ConsoleMenuViewer;
 import com.soft.library.ui.commands.dataBaseCommands.readerCommands.*;
 
+/**
+ * Menu for commands that can be applied to the Reader table
+ */
 public class ReaderMenu implements Menu {
     @Override
     public void execute()  {
@@ -18,7 +21,7 @@ public class ReaderMenu implements Menu {
         readerCommandCollection.addTask(new UpdateReaderMobileCommand());
         readerCommandCollection.addTask(new UpdateReaderNameCommand());
 
-        new MenuViewer(readerCommandCollection).showMenu();
+        new ConsoleMenuViewer(readerCommandCollection).showMenu();
     }
 
     @Override

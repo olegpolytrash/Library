@@ -3,7 +3,7 @@ package com.soft.library.ui.commands;
 import com.soft.library.ui.commandCore.Command;
 
 /**
- * Created by Oleg on 09.04.2015.
+ * Command for exiting from a menu.
  */
 public class ExitMenuCommand implements Command {
     @Override

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Database entry.
+ * Database entry that represents a book.
  */
 @Entity
 public class Book extends StandardEntity {

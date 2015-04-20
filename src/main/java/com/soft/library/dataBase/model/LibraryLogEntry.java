@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Database entry.
+ * Database entry that represents library log entry.
  */
 @Entity
 public class LibraryLogEntry extends StandardEntity {

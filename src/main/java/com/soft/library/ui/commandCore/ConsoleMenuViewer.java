@@ -7,13 +7,13 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * Class which create program menu.
+ * Class for viewing a menu on a console.
  */
-public class MenuViewer {
+public class ConsoleMenuViewer implements MenuViewer {
     public static final int MIN_MENU_INDEX = 0;
     private CommandCollection commandCollection = new CommandCollection();
 
-    public MenuViewer(CommandCollection commandCollection) {
+    public ConsoleMenuViewer(CommandCollection commandCollection) {
         this.setCommandCollection(commandCollection);
         addExitMenuOptionIfAbsent();
     }
@@ -49,6 +49,7 @@ public class MenuViewer {
         System.out.println();
     }
 
+    @Override
     public void showMenu() {
         Scanner scanner = new Scanner(System.in);
 

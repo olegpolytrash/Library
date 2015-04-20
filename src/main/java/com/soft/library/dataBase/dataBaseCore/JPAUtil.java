@@ -3,16 +3,16 @@ package com.soft.library.dataBase.dataBaseCore;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+/**
+ * Class for jpa management functions.
+ */
 public class JpaUtil {
-
     private static final EntityManagerFactory emf = buildEntityManagerFactor();
-
 
     private static EntityManagerFactory buildEntityManagerFactor() {
         try {
             // Create the SessionFactory from hibernate.cfg.xml
             return Persistence.createEntityManagerFactory("JPAService");
-
         }
         catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed
@@ -29,6 +29,4 @@ public class JpaUtil {
         // Close caches and connection pools
         getEntityManagerFactory().close();
     }
-
-    //EntityManager em = emf.createEntityManager();
 }

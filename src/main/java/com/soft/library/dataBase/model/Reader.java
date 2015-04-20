@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Database entry.
+ * Database entry that represents a reader - the library's client.
  */
 @Entity
 @Table(uniqueConstraints = {

@@ -21,8 +21,10 @@ import java.util.Date;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Class for testing Reader's entity crud operations
+ */
 public class ReaderTest {
-
     public ReaderTest() {
         JpaUtil.getEntityManagerFactory();
     }

@@ -24,6 +24,9 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Class for testing Book's entity crud operations
+ */
 public class BookTest {
 
     private static IDatabaseTester databaseTester;

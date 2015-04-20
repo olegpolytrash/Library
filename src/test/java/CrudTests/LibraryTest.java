@@ -27,8 +27,10 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Class for testing Library's entity crud operations
+ */
 public class LibraryTest {
-
     public LibraryTest() {
         JpaUtil.getEntityManagerFactory();
     }

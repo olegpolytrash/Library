@@ -2,11 +2,11 @@ package com.soft.library.ui.menuCreators;
 
 import com.soft.library.ui.commandCore.CommandCollection;
 import com.soft.library.ui.commandCore.Menu;
-import com.soft.library.ui.commandCore.MenuViewer;
+import com.soft.library.ui.commandCore.ConsoleMenuViewer;
 import com.soft.library.ui.commands.dataBaseCommands.authorCommands.*;
 
 /**
- * Created by Oleg on 09.04.2015.
+ * Menu for commands that can be applied to the author table
  */
 public class AuthorMenu implements Menu {
     @Override
@@ -18,7 +18,7 @@ public class AuthorMenu implements Menu {
         authorCommandCollection.addTask(new UpdateAuthorCommand());
         authorCommandCollection.addTask(new InsertAuthorCommand());
 
-        new MenuViewer(authorCommandCollection).showMenu();
+        new ConsoleMenuViewer(authorCommandCollection).showMenu();
     }
 
     @Override

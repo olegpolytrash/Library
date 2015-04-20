@@ -4,7 +4,10 @@ import com.soft.library.dataBase.model.StandardEntity;
 
 import java.util.List;
 
-
+/**
+ * Base interface for all dao objects
+ * @param <E> entity that is a subclass of the StandardEntity class
+ */
 public interface BaseDao  <E extends StandardEntity> {
     E findById(int id);
 

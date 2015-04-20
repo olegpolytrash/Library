@@ -6,6 +6,10 @@ import com.soft.library.dataBase.model.StandardEntity;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+/**
+ * Class for the Base entity dao methods.
+ * All methods of this class can be used in a shared transaction with other methods.
+ */
 public class BaseDaoShared<E extends StandardEntity> implements BaseDao<E> {
     private Class<E> elementClass;
 

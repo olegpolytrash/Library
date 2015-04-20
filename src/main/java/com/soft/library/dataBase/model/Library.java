@@ -6,7 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 
 /**
- * Database entry.
+ * Database entry that represents the library.
  */
 @Entity
 public class Library extends StandardEntity {

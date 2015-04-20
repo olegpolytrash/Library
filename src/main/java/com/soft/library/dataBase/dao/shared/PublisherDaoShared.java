@@ -9,8 +9,8 @@ import com.soft.library.dataBase.model.Publisher;
 import javax.persistence.EntityManager;
 
 /**
- * @author rd
- *
+ * Class for the Publisher entity dao methods.
+ * All methods of this class can be used in a shared transaction with other methods.
  */
 public class PublisherDaoShared extends BaseDaoShared<Publisher> implements PublisherDao {
 

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Database entry.
+ * Database entry that represents an author of a book.
  */
 @Entity
 public class Author extends StandardEntity {

@@ -19,6 +19,9 @@ import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Class for testing Publisher's entity crud operations
+ */
 public class PublisherTest {
 
     private static IDatabaseTester databaseTester;

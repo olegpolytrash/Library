@@ -5,6 +5,9 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
+/**
+ * Base class for entities those id's are generated using standard generators.
+ */
 @MappedSuperclass
 public abstract class StandardEntity implements Serializable {
     @Id

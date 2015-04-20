@@ -7,7 +7,13 @@ import com.soft.library.dataBase.model.StandardEntity;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class BaseDaoIsolated<E extends StandardEntity> implements BaseDao<E> {
+/**
+ * Abstract base class for all isolated entity dao classes.
+ * This class provides general implementation of all BaseDao interface's methods.
+ * All methods of this class are isolated, each of them runs in it's own transaction.
+ * It's impossible to call a method of this class with a method of any other dao class in a single shared transaction.
+ */
+public abstract class BaseDaoIsolated<E extends StandardEntity> implements BaseDao<E> {
     private Class<E> elementClass;
 
     public BaseDaoIsolated(Class<E> elementClass) {

@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 /**
- * Database entry.
+ * Database entry that represents a publisher.
  */
 @Entity
 public class Publisher extends StandardEntity {

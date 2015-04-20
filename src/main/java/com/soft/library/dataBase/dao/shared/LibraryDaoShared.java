@@ -9,8 +9,8 @@ import com.soft.library.dataBase.model.Library;
 import javax.persistence.EntityManager;
 
 /**
- * @author rd
- *
+ * Class for the Library entity dao methods.
+ * All methods of this class can be used in a shared transaction with other methods.
  */
 public class LibraryDaoShared extends BaseDaoShared<Library> implements LibraryDao {
 

@@ -2,11 +2,11 @@ package com.soft.library.ui.menuCreators;
 
 import com.soft.library.ui.commandCore.CommandCollection;
 import com.soft.library.ui.commandCore.Menu;
-import com.soft.library.ui.commandCore.MenuViewer;
+import com.soft.library.ui.commandCore.ConsoleMenuViewer;
 import com.soft.library.ui.commands.dataBaseCommands.publisherCommands.*;
 
 /**
- * Created by Oleg on 09.04.2015.
+ * Menu for commands that can be applied to the Publisher table
  */
 public class PublisherMenu implements Menu {
     @Override
@@ -18,7 +18,7 @@ public class PublisherMenu implements Menu {
         publisherCommandCollection.addTask(new UpdatePublisherCommand());
         publisherCommandCollection.addTask(new InsertPublisherCommand());
 
-        new MenuViewer(publisherCommandCollection).showMenu();
+        new ConsoleMenuViewer(publisherCommandCollection).showMenu();
     }
 
     @Override
