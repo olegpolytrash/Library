@@ -8,7 +8,7 @@ import java.util.Date;
  * Database entry.
  */
 @Entity
-public class LibraryLogEntry extends StandardDBEntity  {
+public class LibraryLogEntry extends StandardEntity {
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Book book;
     

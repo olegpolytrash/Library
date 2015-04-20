@@ -1,16 +1,15 @@
 package com.soft.library.dataBase.model;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import javax.persistence.*;
-import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 
 /**
  * Database entry.
  */
 @Entity
-public class Library extends StandardDBEntity  {
+public class Library extends StandardEntity {
     private Integer pages;
     
     @Column(nullable = false)

@@ -1,10 +1,6 @@
 package com.soft.library.dataBase.model;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import javax.persistence.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +8,7 @@ import java.util.Set;
  * Database entry.
  */
 @Entity
-public class Author extends StandardDBEntity {
+public class Author extends StandardEntity {
 
     @Column(nullable = false, unique = true)
     private String name;

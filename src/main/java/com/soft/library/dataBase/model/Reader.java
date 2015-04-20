@@ -1,8 +1,5 @@
 package com.soft.library.dataBase.model;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,7 +10,7 @@ import java.util.Date;
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames={"name", "surname"})
 })
-public class Reader extends StandardDBEntity  {
+public class Reader extends StandardEntity {
     @Column(nullable = false)
     private String name;
     

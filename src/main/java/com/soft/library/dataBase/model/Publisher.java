@@ -1,18 +1,13 @@
 package com.soft.library.dataBase.model;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 /**
  * Database entry.
  */
 @Entity
-public class Publisher extends StandardDBEntity  {
+public class Publisher extends StandardEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
