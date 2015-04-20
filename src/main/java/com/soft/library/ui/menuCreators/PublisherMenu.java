@@ -1,14 +1,14 @@
-package com.soft.library.ui.menus;
+package com.soft.library.ui.menuCreators;
 
 import com.soft.library.ui.commandCore.CommandCollection;
-import com.soft.library.ui.commandCore.IMenu;
 import com.soft.library.ui.commandCore.Menu;
+import com.soft.library.ui.commandCore.MenuViewer;
 import com.soft.library.ui.commands.dataBaseCommands.publisherCommands.*;
 
 /**
  * Created by Oleg on 09.04.2015.
  */
-public class PublisherMenu implements IMenu {
+public class PublisherMenu implements Menu {
     @Override
     public void execute()  {
         CommandCollection publisherCommandCollection = new CommandCollection();
@@ -18,7 +18,7 @@ public class PublisherMenu implements IMenu {
         publisherCommandCollection.addTask(new UpdatePublisherCommand());
         publisherCommandCollection.addTask(new InsertPublisherCommand());
 
-        new Menu(publisherCommandCollection).runApplication();
+        new MenuViewer(publisherCommandCollection).showMenu();
     }
 
     @Override
