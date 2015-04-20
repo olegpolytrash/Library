@@ -29,8 +29,8 @@ public class LibraryLogEntry extends StandardDBEntity  {
     public LibraryLogEntry(Book book, Reader reader, Date taken, Date returned) {
         this.book = book;
         this.reader = reader;
-        this.taken = taken;
-        this.returned = returned;
+        this.setTaken(taken);
+        this.setReturned(returned);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class LibraryLogEntry extends StandardDBEntity  {
     }
 
     public void setTaken(Date taken) {
-        this.taken = taken;
+        this.taken = new Date(taken.getYear(), taken.getMonth(), taken.getDate());
     }
 
     public Date getReturned() {
@@ -73,6 +73,6 @@ public class LibraryLogEntry extends StandardDBEntity  {
     }
 
     public void setReturned(Date returned) {
-        this.returned = returned;
+        this.returned = new Date(returned.getYear(), returned.getMonth(), returned.getDate());
     }
 }
