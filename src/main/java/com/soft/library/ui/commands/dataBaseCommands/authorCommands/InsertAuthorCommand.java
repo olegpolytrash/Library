@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import com.soft.library.dataBase.model.Book;
-import com.soft.library.dataBase.service.AdvAuthorService;
+import com.soft.library.dataBase.service.AuthorService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
@@ -17,7 +17,7 @@ public class InsertAuthorCommand implements Command {
 
     @Override
     public void execute() {
-        AdvAuthorService aas = new AdvAuthorService();
+        AuthorService aas = new AuthorService();
         String authorName;
 
         System.out.println("Type in Author's name: ");

@@ -1,6 +1,6 @@
 package com.soft.library.ui.commands.dataBaseCommands.bookCommands;
 
-import com.soft.library.dataBase.service.AdvBookService;
+import com.soft.library.dataBase.service.BookService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
@@ -14,7 +14,7 @@ public class UpdateBookCommand implements Command {
         String oldName = ValidData.getWords();
         System.out.println("Type in Book's new name: ");
         String newName = ValidData.getWords();
-        new AdvBookService().updateBooks(oldName, newName);
+        new BookService().updateBooks(oldName, newName);
     }
 
     @Override

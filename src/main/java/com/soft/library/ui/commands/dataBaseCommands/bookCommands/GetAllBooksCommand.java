@@ -1,6 +1,6 @@
 package com.soft.library.ui.commands.dataBaseCommands.bookCommands;
 
-import com.soft.library.dataBase.service.AdvBookService;
+import com.soft.library.dataBase.service.BookService;
 import com.soft.library.ui.commandCore.Command;
 
 /**
@@ -9,7 +9,7 @@ import com.soft.library.ui.commandCore.Command;
 public class GetAllBooksCommand implements Command {
     @Override
     public void execute() {
-        new AdvBookService().printBooks();
+        new BookService().printBooks();
     }
 
     @Override

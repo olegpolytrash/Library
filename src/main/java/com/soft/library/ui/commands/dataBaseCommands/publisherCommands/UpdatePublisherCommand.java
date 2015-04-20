@@ -1,6 +1,6 @@
 package com.soft.library.ui.commands.dataBaseCommands.publisherCommands;
 
-import com.soft.library.dataBase.service.AdvPublisherService;
+import com.soft.library.dataBase.service.PublisherService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
@@ -14,7 +14,7 @@ public class UpdatePublisherCommand implements Command {
         String oldName = ValidData.getWords();
         System.out.println("Type in Publisher's new name: ");
         String newName = ValidData.getWords();
-        new AdvPublisherService().updatePublishers(oldName, newName);
+        new PublisherService().updatePublishers(oldName, newName);
     }
 
     @Override

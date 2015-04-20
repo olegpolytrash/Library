@@ -12,7 +12,7 @@ import com.soft.library.dataBase.dao.impl.BookDAOImpl;
 import com.soft.library.dataBase.dataBaseCore.JPAUtil;
 import com.soft.library.dataBase.model.Reader;
 
-public class AdvReaderService {
+public class ReaderService {
     public void addReader(String name, String surname, String mobilePhone,
             String address, Date birthDate) {
         

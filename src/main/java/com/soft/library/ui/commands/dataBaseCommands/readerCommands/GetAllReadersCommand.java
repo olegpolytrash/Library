@@ -1,6 +1,6 @@
 package com.soft.library.ui.commands.dataBaseCommands.readerCommands;
 
-import com.soft.library.dataBase.service.AdvReaderService;
+import com.soft.library.dataBase.service.ReaderService;
 import com.soft.library.ui.commandCore.Command;
 
 /**
@@ -9,7 +9,7 @@ import com.soft.library.ui.commandCore.Command;
 public class GetAllReadersCommand implements Command {
     @Override
     public void execute() {
-        new AdvReaderService().printReaders();
+        new ReaderService().printReaders();
     }
 
     @Override

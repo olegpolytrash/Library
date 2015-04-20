@@ -1,6 +1,6 @@
 package com.soft.library.ui.commands.dataBaseCommands.readerCommands;
 
-import com.soft.library.dataBase.service.AdvReaderService;
+import com.soft.library.dataBase.service.ReaderService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
@@ -11,7 +11,7 @@ public class DeleteReaderCommand implements Command {
     @Override
     public void execute() {
         System.out.println("Enter reader title:");
-        new AdvReaderService().deleteReader(ValidData.getWords());
+        new ReaderService().deleteReader(ValidData.getWords());
     }
 
     @Override

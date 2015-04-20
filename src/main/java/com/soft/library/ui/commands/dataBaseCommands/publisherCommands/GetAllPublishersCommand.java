@@ -1,6 +1,6 @@
 package com.soft.library.ui.commands.dataBaseCommands.publisherCommands;
 
-import com.soft.library.dataBase.service.AdvPublisherService;
+import com.soft.library.dataBase.service.PublisherService;
 import com.soft.library.ui.commandCore.Command;
 
 /**
@@ -9,7 +9,7 @@ import com.soft.library.ui.commandCore.Command;
 public class GetAllPublishersCommand implements Command {
     @Override
     public void execute() {
-        new AdvPublisherService().printPublishers();
+        new PublisherService().printPublishers();
     }
 
     @Override

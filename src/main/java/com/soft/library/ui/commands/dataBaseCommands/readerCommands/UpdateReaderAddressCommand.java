@@ -1,6 +1,6 @@
 package com.soft.library.ui.commands.dataBaseCommands.readerCommands;
 
-import com.soft.library.dataBase.service.AdvReaderService;
+import com.soft.library.dataBase.service.ReaderService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
@@ -14,7 +14,7 @@ public class UpdateReaderAddressCommand implements Command {
         System.out.println("Type in Reader's new address: ");
         newAddress = ValidData.getWords();
 
-        new AdvReaderService().updateReaderAddress(oldAddress, newAddress);
+        new ReaderService().updateReaderAddress(oldAddress, newAddress);
     }
 
     @Override

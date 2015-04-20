@@ -1,6 +1,6 @@
 package com.soft.library.ui.commands.dataBaseCommands.authorCommands;
 
-import com.soft.library.dataBase.service.AdvAuthorService;
+import com.soft.library.dataBase.service.AuthorService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
@@ -14,7 +14,7 @@ public class UpdateAuthorCommand implements Command {
         String oldName = ValidData.getWords();
         System.out.println("Type in Author's new name: ");
         String newName = ValidData.getWords();
-        new AdvAuthorService().updateAuthors(oldName, newName);
+        new AuthorService().updateAuthors(oldName, newName);
         
     }
 

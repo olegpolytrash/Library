@@ -1,6 +1,6 @@
 package com.soft.library.ui.commands.dataBaseCommands.bookCommands;
 
-import com.soft.library.dataBase.service.AdvBookService;
+import com.soft.library.dataBase.service.BookService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
@@ -10,7 +10,7 @@ import com.soft.library.ui.commandCore.Command;
 public class GetBookByIdCommand implements Command {
     @Override
     public void execute() {
-        AdvBookService aas = new AdvBookService();
+        BookService aas = new BookService();
         System.out.println("Enter id: ");
         int bookId = ValidData.getDigit();
         System.out.println(aas.getBookById(bookId));

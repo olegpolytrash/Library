@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.soft.library.dataBase.service;
 
 import java.util.Set;
@@ -9,43 +12,46 @@ import com.soft.library.dataBase.dao.BookDAO;
 import com.soft.library.dataBase.dao.impl.AuthorDAOImpl;
 import com.soft.library.dataBase.dao.impl.BookDAOImpl;
 import com.soft.library.dataBase.dataBaseCore.JPAUtil;
-import com.soft.library.dataBase.model.Book;
+import com.soft.library.dataBase.model.Author;
 
-
-public class AdvBookService {
-    public void addBook(String title, Set<String> authors) {
+/**
+ * @author rd
+ *
+ */
+public class AuthorService {
+    public void addAuthor(String title, Set<String> books) {
         // prepare
         EntityManager entityManager = JPAUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        BookDAO bookDAO = new BookDAOImpl(entityManager);
         AuthorDAO authorDAO = new AuthorDAOImpl(entityManager);
-        Book book = new Book();
-        book.setName(title);
+        BookDAO bookDAO = new BookDAOImpl(entityManager);
+        Author author = new Author();
+        author.setName(title);
         Contributors con = new Contributors();
-        book.setAuthors(con.getAuthor(authors, authorDAO));
-        book = bookDAO.saveEntity(book);
+        author.setBooks(con.getBook(books, bookDAO));
+        author = authorDAO.saveEntity(author);
         
         // close
         entityManager.getTransaction().commit();
     }
 
-    public int updateBooks(String oldName, String newName) {
+    public int updateAuthors(String oldName, String newName) {
         // prepare
         EntityManager entityManager = JPAUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        BookDAO bookDAO = new BookDAOImpl(entityManager);
+        AuthorDAO authorDAO = new AuthorDAOImpl(entityManager);
 
         int count = 0;
-        for (Book a : bookDAO.getAll()) {
+        for (Author a : authorDAO.getAll()) {
             if (a.getName().equals(oldName)) {
                 a.setName(newName);
-                a = bookDAO.saveEntity(a);
+                a = authorDAO.saveEntity(a);
                 count++;
             }
         }
@@ -56,18 +62,18 @@ public class AdvBookService {
         return count;
     }
 
-    public void printBooks() {
+    public void printAuthors() {
         // prepare
         EntityManager entityManager = JPAUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        BookDAO bookDAO = new BookDAOImpl(entityManager);
+        AuthorDAO authorDAO = new AuthorDAOImpl(entityManager);
 
-        System.out.println("\nAll Books:");
-        for (Book a : bookDAO.getAll()) {
-            System.out.println("bookDAO: id=" + a.getId() + " Title="
+        System.out.println("\nAll Authors:");
+        for (Author a : authorDAO.getAll()) {
+            System.out.println("authorDAO: id=" + a.getId() + " Title="
                     + a.getName());
         }
 
@@ -75,35 +81,35 @@ public class AdvBookService {
         entityManager.getTransaction().commit();
     }
 
-    public Book getBookById(int bookDAOId) {
+    public Author getAuthorById(int authorDAOId) {
         // prepare
         EntityManager entityManager = JPAUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        BookDAO bookDAO = new BookDAOImpl(entityManager);
+        AuthorDAO authorDAO = new AuthorDAOImpl(entityManager);
 
-        Book book = bookDAO.findById(bookDAOId);
+        Author author = authorDAO.findById(authorDAOId);
 
         // close
         entityManager.getTransaction().commit();
 
-        return book;
+        return author;
     }
 
-    public void deleteBook(String name) {
+    public void deleteAuthor(String name) {
         // prepare
         EntityManager entityManager = JPAUtil.getEntityManagerFactory()
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
         // initialize DAO
-        BookDAO bookDAO = new BookDAOImpl(entityManager);
+        AuthorDAO authorDAO = new AuthorDAOImpl(entityManager);
 
-        for (Book a : bookDAO.getAll()) {
+        for (Author a : authorDAO.getAll()) {
             if (a.getName().equalsIgnoreCase(name)) {
-                bookDAO.remove(a);
+                authorDAO.remove(a);
                 break;
             }
         }

@@ -1,6 +1,6 @@
 package com.soft.library.ui.commands.dataBaseCommands.publisherCommands;
 
-import com.soft.library.dataBase.service.AdvPublisherService;
+import com.soft.library.dataBase.service.PublisherService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
@@ -10,7 +10,7 @@ import com.soft.library.ui.commandCore.Command;
 public class GetPublisherByIdCommand implements Command {
     @Override
     public void execute() {
-        AdvPublisherService aas = new AdvPublisherService();
+        PublisherService aas = new PublisherService();
         System.out.println("Enter id: ");
         int publisherId = ValidData.getDigit();
         System.out.println(aas.getPublisherById(publisherId));

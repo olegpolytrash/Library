@@ -1,6 +1,6 @@
 package com.soft.library.ui.commands.dataBaseCommands.readerCommands;
 
-import com.soft.library.dataBase.service.AdvReaderService;
+import com.soft.library.dataBase.service.ReaderService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
@@ -15,7 +15,7 @@ public class UpdateReaderBDateCommand implements Command{
         System.out.println("Type in Reader's new birth date: ");
         newBDate = ValidData.getWords();
 
-        new AdvReaderService().updateReaderBDate(oldBDate, newBDate);
+        new ReaderService().updateReaderBDate(oldBDate, newBDate);
     }
 
     @Override

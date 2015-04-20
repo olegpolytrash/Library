@@ -14,7 +14,7 @@ import com.soft.library.dataBase.model.Publisher;
  * @publisher rd
  *
  */
-public class AdvPublisherService {
+public class PublisherService {
     public void addPublisher(String name) {
         // prepare
         EntityManager entityManager = JPAUtil.getEntityManagerFactory()

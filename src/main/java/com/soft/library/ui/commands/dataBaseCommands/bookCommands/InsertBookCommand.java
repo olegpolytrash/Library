@@ -2,7 +2,7 @@ package com.soft.library.ui.commands.dataBaseCommands.bookCommands;
 
 import java.util.Set;
 
-import com.soft.library.dataBase.service.AdvBookService;
+import com.soft.library.dataBase.service.BookService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
@@ -13,7 +13,7 @@ public class InsertBookCommand implements Command {
 
     @Override
     public void execute() {
-        AdvBookService aas = new AdvBookService();
+        BookService aas = new BookService();
         String bookName;
 
         System.out.println("Type in Book's name: ");

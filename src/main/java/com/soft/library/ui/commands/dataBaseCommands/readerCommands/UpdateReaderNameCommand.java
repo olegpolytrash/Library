@@ -1,6 +1,6 @@
 package com.soft.library.ui.commands.dataBaseCommands.readerCommands;
 
-import com.soft.library.dataBase.service.AdvReaderService;
+import com.soft.library.dataBase.service.ReaderService;
 import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
@@ -21,7 +21,7 @@ public class UpdateReaderNameCommand implements Command {
         System.out.println("Type in Reader's new Second name: ");
         newSecName = ValidData.getWords();
 
-        new AdvReaderService().updateReaderName(oldFirstName, newFirstName,
+        new ReaderService().updateReaderName(oldFirstName, newFirstName,
                 oldSecName, newSecName);
     }
 
