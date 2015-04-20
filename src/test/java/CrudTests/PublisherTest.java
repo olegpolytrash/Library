@@ -29,7 +29,7 @@ public class PublisherTest {
         databaseTester = new JdbcDatabaseTester("com.mysql.jdbc.Driver",
                 "jdbc:mysql://localhost/sql373362", "root", "1234");
 
-        dataSet = new FlatXmlDataSetBuilder().build(new File("src\\test\\resources\\publisher.xml"));
+        dataSet = new FlatXmlDataSetBuilder().build(new File("src\\test\\resources\\datasets\\publisher.xml"));
 
         databaseTester.setDataSet(dataSet);
     }

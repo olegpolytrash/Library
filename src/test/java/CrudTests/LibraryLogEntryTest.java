@@ -35,7 +35,7 @@ public class LibraryLogEntryTest {
         databaseTester = new JdbcDatabaseTester("com.mysql.jdbc.Driver",
                 "jdbc:mysql://localhost/sql373362", "root", "1234");
 
-        dataSet = new FlatXmlDataSetBuilder().build(new File("src\\test\\resources\\libraryLogEntry.xml"));
+        dataSet = new FlatXmlDataSetBuilder().build(new File("src\\test\\resources\\datasets\\libraryLogEntry.xml"));
 
         databaseTester.setDataSet(dataSet);
     }

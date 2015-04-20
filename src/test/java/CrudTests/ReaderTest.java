@@ -35,7 +35,7 @@ public class ReaderTest {
         databaseTester = new JdbcDatabaseTester("com.mysql.jdbc.Driver",
                 "jdbc:mysql://localhost/sql373362", "root", "1234");
 
-        dataSet = new FlatXmlDataSetBuilder().build(new File("src\\test\\resources\\reader.xml"));
+        dataSet = new FlatXmlDataSetBuilder().build(new File("src\\test\\resources\\datasets\\reader.xml"));
 
         databaseTester.setDataSet(dataSet);
 
