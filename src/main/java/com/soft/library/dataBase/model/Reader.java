@@ -28,7 +28,7 @@ public class Reader {
     
     private String address;
     
-    private Date birthDate;
+    private Date birth_date;
 
     public Reader() {
     }
@@ -38,7 +38,7 @@ public class Reader {
         this.surname = surname;
         this.mobilePhone = mobilePhone;
         this.address = address;
-        this.birthDate = birthDate;
+        this.birth_date = birthDate;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Reader {
                 ", surname='" + surname + '\'' +
                 ", mobilePhone='" + mobilePhone + '\'' +
                 ", address='" + address + '\'' +
-                ", birthDate=" + birthDate +
+                ", birthDate=" + birth_date +
                 '}';
     }
 
@@ -114,10 +114,10 @@ public class Reader {
     }
 
     public Date getBirthDate() {
-        return birthDate;
+        return birth_date;
     }
 
     public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+        this.birth_date = birthDate;
     }
 }

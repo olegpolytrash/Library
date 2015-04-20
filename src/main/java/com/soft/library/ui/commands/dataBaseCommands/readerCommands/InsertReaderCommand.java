@@ -1,6 +1,11 @@
 package com.soft.library.ui.commands.dataBaseCommands.readerCommands;
 
+//import java.sql.Date;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
 import com.soft.library.dataBase.service.AdvReaderService;
 import com.soft.library.dataBase.service.ValidData;
@@ -13,22 +18,26 @@ public class InsertReaderCommand implements Command {
 
     @Override
     public void execute() {
+        
         AdvReaderService aas = new AdvReaderService();
         String firstName, secName, mobile, address;
-        Date birthDate;
+        java.sql.Date birthDate;
 
         System.out.println("Type in Reader's first name: ");
-        firstName = ValidData.getWords();
+//        firstName = ValidData.getWords();
+        firstName = "rn1";
         System.out.println("Type in Reader's surname: ");
-        secName = ValidData.getWords();
+//        secName = ValidData.getWords();
+        secName = "rs1";
         System.out.println("Type in Reader's mobile: ");
-        mobile = ValidData.getWords();
+//        mobile = Integer.toString(ValidData.getDigit());
+        mobile = "rmob";
         System.out.println("Type in Reader's address: ");
-        address = ValidData.getWords();
+//        address = ValidData.getWords();
+        address = "a1";
         System.out.println("Type in Reader's birth date: ");
-        birthDate = Date.valueOf(ValidData.getWords());
         
-        aas.addReader(firstName, secName, mobile, address, birthDate);
+        aas.addReader(firstName, secName, mobile, address, new Date(123123));
     }
 
     @Override

@@ -14,6 +14,7 @@ public class MainMenu implements IMenu {
         menuCollection.addTask(new BookMenu());
         menuCollection.addTask(new AuthorMenu());
         menuCollection.addTask(new PublisherMenu());
+        menuCollection.addTask(new ReaderMenu());
 
         new Menu(menuCollection).runApplication();
     }

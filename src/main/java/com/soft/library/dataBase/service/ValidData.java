@@ -39,7 +39,7 @@ public class ValidData {
      */
     @SuppressWarnings("resource")
     public static int getDigit() {
-        String regx = "^\\s*\\d{1}\\s*$";
+        String regx = "^\\s*\\d*\\s*$";
         Scanner sc = new Scanner(System.in);
         String result = "";
 

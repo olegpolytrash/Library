@@ -77,17 +77,4 @@ public class Contributors {
             e.save(author);
         return author;
     }
-//    @SuppressWarnings({ "unchecked", "rawtypes" })
-//    public <E extends BaseDao> Reader getReader(String name, E e) {
-//        List<Reader> list = (List<Reader>) e.getAll();
-//        for (Reader a : list) {
-//            if (name.equals(a.getName())) {
-//                return a;
-//            }
-//        }
-//        Reader author = new Reader(name);
-//        e.save(author);
-//        return author;
-//    }
-
 }
