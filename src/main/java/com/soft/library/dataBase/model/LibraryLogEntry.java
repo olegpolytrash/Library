@@ -18,7 +18,7 @@ public class LibraryLogEntry extends StandardDBEntity  {
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date taken;
-    
+
     @Temporal(TemporalType.DATE)
     private Date returned;
 
@@ -64,7 +64,11 @@ public class LibraryLogEntry extends StandardDBEntity  {
     }
 
     public void setTaken(Date taken) {
-        this.taken = new Date(taken.getYear(), taken.getMonth(), taken.getDate());
+        if (taken == null) {
+            this.taken = null;
+        } else {
+            this.taken = new Date(taken.getYear(), taken.getMonth(), taken.getDate());
+        }
     }
 
     public Date getReturned() {
@@ -72,6 +76,10 @@ public class LibraryLogEntry extends StandardDBEntity  {
     }
 
     public void setReturned(Date returned) {
-        this.returned = new Date(returned.getYear(), returned.getMonth(), returned.getDate());
+        if (returned == null) {
+            this.returned = null;
+        } else {
+            this.returned = new Date(returned.getYear(), returned.getMonth(), returned.getDate());
+        }
     }
 }

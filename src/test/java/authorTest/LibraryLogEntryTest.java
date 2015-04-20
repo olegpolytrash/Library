@@ -122,4 +122,37 @@ public class LibraryLogEntryTest {
 
         assertEquals(3, libraryLogEntryDAO.getAll().size());
     }
+
+    @Test
+    public void remove() {
+        LibraryLogEntryDAO libraryLogEntryDAO = new LibraryLogEntryDAO();
+
+        List<LibraryLogEntry> logs = Arrays.asList(new LibraryLogEntry(b1, r1, new Date(123123), new Date(345345)),
+                new LibraryLogEntry(b2, r2, new Date(123123), new Date(345345)),
+                new LibraryLogEntry(b3, r3, new Date(123123), new Date(345345)));
+
+        for (int i = 0; i < logs.size(); ++i) {
+            logs.set(i, libraryLogEntryDAO.saveEntity(logs.get(i)));
+        }
+
+        libraryLogEntryDAO.remove(logs.get(1));
+
+        assertEquals(2, libraryLogEntryDAO.getAll().size());
+    }
+
+    @Test
+    public void update() {
+        LibraryLogEntryDAO libraryLogEntryDAO = new LibraryLogEntryDAO();
+
+        LibraryLogEntry libraryLogEntry1 = new LibraryLogEntry(b1, r1, new Date(123123), new Date(345345));
+        libraryLogEntry1 = libraryLogEntryDAO.saveEntity(libraryLogEntry1);
+
+        libraryLogEntry1.setReturned(new Date(4444444));
+        libraryLogEntry1 = libraryLogEntryDAO.saveEntity(libraryLogEntry1);
+
+        LibraryLogEntry logFromDB = libraryLogEntryDAO.findById(libraryLogEntry1.getId());
+
+        assertTrue(isEqual(libraryLogEntry1, logFromDB));
+        assertEquals(1, libraryLogEntryDAO.getAll().size());
+    }
 }
