@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataset>
+    <book id="1" name="book1" />
+    <book id="2" name="book2" />
+    <book id="3" name="book3" />
+
+    <author id="1" name="author1" />
+    <author id="2" name="author2" />
+    <author id="3" name="author3" />
+
+    <publisher id="1" name="publisher1" />
+    <publisher id="2" name="publisher2" />
+    <publisher id="3" name="publisher3" />
+
+    <bookauthor Author_ID="1" Book_ID="1" />
+    <bookauthor Author_ID="2" Book_ID="2" />
+    <!-- two authors for one book -->
+    <bookauthor Author_ID="3" Book_ID="3" />
+    <bookauthor Author_ID="2" Book_ID="3" />
+
+    <library />
+</dataset>

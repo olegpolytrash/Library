@@ -12,9 +12,8 @@ import java.util.Set;
  * Database entry.
  */
 @Entity
-public class Author {
-    @Id @GeneratedValue
-    private Integer id;
+public class Author extends StandardDBEntity {
+
     @Column(nullable = false, unique = true)
     private String name;
     
@@ -31,41 +30,18 @@ public class Author {
         this.name = name;
     }
 
+    public Author(String name, Set<Book> books) {
+        this.name = name;
+        this.books = books;
+    }
+
     @Override
     public String toString() {
         return "Author{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
-                //", books=" + books +
+                ", books=" + books +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Author author = (Author) o;
-
-        return new EqualsBuilder()
-                .append(getId(), author.getId())
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(getId())
-                .toHashCode();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

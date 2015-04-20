@@ -11,7 +11,7 @@ public class AdvReaderService {
 //    public void addReader(String title) {
 //        Reader reader = new Reader();
 //        reader.setName(title);
-//        readerDAO.save(reader);
+//        readerDAO.saveNewEntity(reader);
 //    }
 //
 //    public int updateReaders(String oldName, String newName) {

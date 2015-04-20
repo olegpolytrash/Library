@@ -17,7 +17,7 @@ public class AdvPublisherService {
 //    public void addPublisher(String title) {
 //        Publisher publisher = new Publisher();
 //        publisher.setName(title);
-//        publisherDAO.save(publisher);
+//        publisherDAO.saveNewEntity(publisher);
 //    }
 //
 //    public int updatePublishers(String oldName, String newName) {

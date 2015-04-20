@@ -4,7 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Database entry.
@@ -13,11 +13,7 @@ import java.sql.Date;
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames={"name", "surname"})
 })
-public class Reader {
-    
-    @Id @GeneratedValue
-    private Integer id;
-    
+public class Reader extends StandardDBEntity  {
     @Column(nullable = false)
     private String name;
     
@@ -27,7 +23,8 @@ public class Reader {
     private String mobilePhone;
     
     private String address;
-    
+
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
 
     public Reader() {
@@ -44,41 +41,13 @@ public class Reader {
     @Override
     public String toString() {
         return "Reader{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", mobilePhone='" + mobilePhone + '\'' +
                 ", address='" + address + '\'' +
                 ", birthDate=" + birthDate +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Reader reader = (Reader) o;
-
-        return new EqualsBuilder()
-                .append(getId(), reader.getId())
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(getId())
-                .toHashCode();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

@@ -3,10 +3,11 @@ package com.soft.library.dataBase.dao.impl;
 import java.util.List;
 import com.soft.library.dataBase.dao.BaseDao;
 import com.soft.library.dataBase.model.Author;
+import com.soft.library.dataBase.model.StandardDBEntity;
 
 import javax.persistence.EntityManager;
 
-public class ElementDAOImpl<E> implements BaseDao<E> {
+public class ElementDAOImpl<E extends StandardDBEntity> implements BaseDao<E> {
     private Class<E> elementClass;
 
     public ElementDAOImpl(Class<E> elementClass, EntityManager entityManager) {
@@ -25,12 +26,12 @@ public class ElementDAOImpl<E> implements BaseDao<E> {
     }
 
     @Override
-    public void save(E element) {
+    public void saveNewEntity(E element) {
         entityManager.persist(element);
     }
 
     @Override
-    public E getUpdatedEntity(E element) {
+    public E saveEntity(E element) {
         return entityManager.merge(element);
     }
 
@@ -52,6 +53,6 @@ public class ElementDAOImpl<E> implements BaseDao<E> {
 
     @Override
     public void remove(E element) {
-        entityManager.remove(element);
+            entityManager.remove(element);
     }
 }

@@ -1,25 +1,23 @@
 package com.soft.library.dataBase.model;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Database entry.
  */
 @Entity
-public class LibraryLogEntry {
-    @Id @GeneratedValue
-    private Integer id;
+public class LibraryLogEntry extends StandardDBEntity  {
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Book book;
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Reader reader;
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date taken;
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date returned;
 
     public LibraryLogEntry() {
@@ -35,40 +33,12 @@ public class LibraryLogEntry {
     @Override
     public String toString() {
         return "LibraryLogEntry{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", books=" + book +
                 ", readers=" + reader +
                 ", taken=" + taken +
                 ", returned=" + returned +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        LibraryLogEntry that = (LibraryLogEntry) o;
-
-        return new EqualsBuilder()
-                .append(getId(), that.getId())
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(getId())
-                .toHashCode();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Book getBook() {

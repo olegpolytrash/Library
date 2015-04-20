@@ -27,7 +27,7 @@ public class AdvAuthorService {
 
         Author author = new Author();
         author.setName(title);
-        authorDAO.save(author);
+        authorDAO.saveNewEntity(author);
 
         // close
         entityManager.getTransaction().commit();
@@ -45,7 +45,7 @@ public class AdvAuthorService {
         for (Author a : authorDAO.getAll()) {
             if (a.getName().equals(oldName)) {
                 a.setName(newName);
-                authorDAO.update(a);
+               // authorDAO.saveEntity(a);
                 count++;
             }
         }

@@ -38,7 +38,7 @@ public class AuthorTest {
 //        Transaction tx = session.getTransaction();
 //
 //        Author author1 = new Author("author1");
-//        session.save(author1);
+//        session.saveNewEntity(author1);
 //
 //        tx.commit();
 //        session.close();

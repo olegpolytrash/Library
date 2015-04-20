@@ -4,14 +4,13 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Database entry.
  */
 @Entity
-public class Library {
-    @Id @GeneratedValue
-    private Integer id;
+public class Library extends StandardDBEntity  {
     private Integer pages;
     @Column(nullable = false)
     private Integer year;
@@ -25,16 +24,24 @@ public class Library {
     public Library() {
     }
 
-    public Library(int pages, int year, int quantity) {
+    public Library(Integer pages, Integer year, Integer quantity) {
         this.pages = pages;
         this.year = year;
         this.quantity = quantity;
     }
 
+    public Library(Integer pages, Integer year, Integer quantity, Book book, Publisher publisher) {
+        this.pages = pages;
+        this.year = year;
+        this.quantity = quantity;
+        this.book = book;
+        this.publisher = publisher;
+    }
+
     @Override
     public String toString() {
         return "Library{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", pages=" + pages +
                 ", year=" + year +
                 ", quantity=" + quantity +
@@ -43,55 +50,27 @@ public class Library {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Library library = (Library) o;
-
-        return new EqualsBuilder()
-                .append(getId(), library.getId())
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(getId())
-                .toHashCode();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getPages() {
+    public Integer getPages() {
         return pages;
     }
 
-    public void setPages(int pages) {
+    public void setPages(Integer pages) {
         this.pages = pages;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 

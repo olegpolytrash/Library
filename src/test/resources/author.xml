@@ -2,5 +2,8 @@
 
 <dataset>
     <author />
+    <book id="1" name="book1" />
+    <book id="2" name="book2" />
+    <book id="3" name="book3" />
     <bookauthor />
 </dataset>

@@ -11,7 +11,7 @@ public class AdvBookService {
 //    public void addBook(String title) {
 //        Book book = new Book();
 //        book.setName(title);
-//        bookDAO.save(book);
+//        bookDAO.saveNewEntity(book);
 //    }
 //
 //    public int updateBooks(String oldName, String newName) {
