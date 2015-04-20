@@ -19,7 +19,6 @@ public class LibraryLogEntry extends StandardDBEntity  {
     @Temporal(TemporalType.DATE)
     private Date taken;
     
-    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date returned;
 
