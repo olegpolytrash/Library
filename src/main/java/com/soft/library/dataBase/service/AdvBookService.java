@@ -26,7 +26,7 @@ public class AdvBookService {
         book.setName(title);
         Contributors con = new Contributors();
         book.setAuthors(con.getAuthor(authors, authorDAO));
-        bookDAO.save(book);
+        book = bookDAO.saveEntity(book);
         
         // close
         entityManager.getTransaction().commit();
@@ -45,8 +45,7 @@ public class AdvBookService {
         for (Book a : bookDAO.getAll()) {
             if (a.getName().equals(oldName)) {
                 a.setName(newName);
-                a = bookDAO.getUpdatedEntity(a);
-                bookDAO.save(a);
+                a = bookDAO.saveEntity(a);
                 count++;
             }
         }

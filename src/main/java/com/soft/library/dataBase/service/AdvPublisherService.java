@@ -25,7 +25,7 @@ public class AdvPublisherService {
         PublisherDAO publisherDAO = new PublisherDAOImpl(entityManager);
         Publisher publisher = new Publisher();
         publisher.setName(name);
-        publisherDAO.save(publisher);
+        publisher = publisherDAO.saveEntity(publisher);
         
         // close
         entityManager.getTransaction().commit();
@@ -44,7 +44,7 @@ public class AdvPublisherService {
         for (Publisher a : publisherDAO.getAll()) {
             if (a.getName().equals(oldName)) {
                 a.setName(newName);
-                a = publisherDAO.getUpdatedEntity(a);
+                a = publisherDAO.saveEntity(a);
                 count++;
             }
         }

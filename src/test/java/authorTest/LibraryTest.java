@@ -143,23 +143,23 @@ public class LibraryTest {
         assertEquals(2, libraryDAO.getAll().size());
     }
 
-    @Test
-    public void testRemove() {
-        LibraryDAO libraryDAO = new com.soft.library.dataBase.dao.oneOp.LibraryDAO();
-
-        // create and saveNewEntity an author
-        Library library1 = new Library(100, 2011, 10, b1, p1);
-        Library library2 = new Library(200, 2012, 20, b2, p2);
-        Library library3 = new Library(300, 2013, 30, b3, p3);
-
-        library1 = libraryDAO.saveEntity(library1);
-        library2 = libraryDAO.saveEntity(library2);
-        library3 = libraryDAO.saveEntity(library3);
-
-        // remove one library
-        libraryDAO.remove(library2);
-
-        // check lengths
-        assertEquals(2, libraryDAO.getAll().size());
-    }
+//    @Test
+//    public void testRemove() {
+//        LibraryDAO libraryDAO = new com.soft.library.dataBase.dao.oneOp.LibraryDAO();
+//
+//        // create and saveNewEntity an author
+//        Library library1 = new Library(100, 2011, 10, b1, p1);
+//        Library library2 = new Library(200, 2012, 20, b2, p2);
+//        Library library3 = new Library(300, 2013, 30, b3, p3);
+//
+//        library1 = libraryDAO.saveEntity(library1);
+//        library2 = libraryDAO.saveEntity(library2);
+//        library3 = libraryDAO.saveEntity(library3);
+//
+//        // remove one library
+//        libraryDAO.remove(library2);
+//
+//        // check lengths
+//        assertEquals(2, libraryDAO.getAll().size());
+//    }
 }

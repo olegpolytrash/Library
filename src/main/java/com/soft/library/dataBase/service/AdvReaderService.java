@@ -25,7 +25,7 @@ public class AdvReaderService {
         ReaderDAO readerDAO = new ReaderDAOImpl(entityManager);
         Reader reader = new Reader(name, surname, mobilePhone, address,
                 birthDate);
-        readerDAO.save(reader);
+        reader = readerDAO.saveEntity(reader);
 
         // close
         entityManager.getTransaction().commit();
@@ -45,7 +45,7 @@ public class AdvReaderService {
         for (Reader a : readerDAO.getAll()) {
             if (a.getBirthDate().equals(Date.valueOf(oldBDate))) {
                 a.setBirthDate(Date.valueOf(newBDate));
-                a = readerDAO.getUpdatedEntity(a);
+                a = readerDAO.saveEntity(a);
                 count++;
             }
         }
@@ -72,7 +72,7 @@ public class AdvReaderService {
                     && a.getSurname().equals(oldSecName)) {
                 a.setName(newFirstName);
                 a.setSurname(newSecName);
-                a = readerDAO.getUpdatedEntity(a);
+                a = readerDAO.saveEntity(a);
                 count++;
             }
         }
@@ -96,7 +96,7 @@ public class AdvReaderService {
         for (Reader a : readerDAO.getAll()) {
             if (a.getMobilePhone().equals(oldMobile)) {
                 a.setMobilePhone(newMobile);
-                a = readerDAO.getUpdatedEntity(a);
+                a = readerDAO.saveEntity(a);
                 count++;
             }
         }
@@ -120,7 +120,7 @@ public class AdvReaderService {
         for (Reader a : readerDAO.getAll()) {
             if (a.getAddress().equals(oldAddress)) {
                 a.setAddress(newAddress);
-                a = readerDAO.getUpdatedEntity(a);
+                a = readerDAO.saveEntity(a);
                 count++;
             }
         }

@@ -29,7 +29,7 @@ public class Contributors {
                 }
             }
             Book book = new Book(s);
-            e.save(book);
+            book = (Book) e.saveEntity(book);
             books.add(book);
         }
         return books;
@@ -44,7 +44,7 @@ public class Contributors {
             }
         }
         Book book = new Book(name);
-        e.save(book);
+        book = (Book) e.saveEntity(book);
         return book;
     }
 
@@ -60,7 +60,7 @@ public class Contributors {
                 }
             }
             Author author = new Author(s);
-            e.save(author);
+            author = (Author) e.saveEntity(author);
             authors.add(author);
         }
         return authors;
@@ -74,7 +74,7 @@ public class Contributors {
                 }
             }
             Author author = new Author(name);
-            e.save(author);
+            author = (Author)e.saveEntity(author);
         return author;
     }
 }
