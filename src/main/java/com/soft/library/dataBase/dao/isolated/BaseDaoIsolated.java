@@ -1,22 +1,22 @@
-package com.soft.library.dataBase.dao.oneOp;
+package com.soft.library.dataBase.dao.isolated;
 
 import com.soft.library.dataBase.dao.BaseDao;
-import com.soft.library.dataBase.dataBaseCore.JPAUtil;
-import com.soft.library.dataBase.model.StandardDBEntity;
+import com.soft.library.dataBase.dataBaseCore.JpaUtil;
+import com.soft.library.dataBase.model.StandardDbEntity;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class ElementDAO<E extends StandardDBEntity> implements BaseDao<E> {
+public class BaseDaoIsolated<E extends StandardDbEntity> implements BaseDao<E> {
     private Class<E> elementClass;
 
-    public ElementDAO(Class<E> elementClass) {
+    public BaseDaoIsolated(Class<E> elementClass) {
         this.elementClass = elementClass;
     }
 
     @Override
     public void saveNewEntity(E element) {
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory().createEntityManager();
         entityManager.getTransaction().begin();
 
         try {
@@ -31,7 +31,7 @@ public class ElementDAO<E extends StandardDBEntity> implements BaseDao<E> {
 
     @Override
     public E saveEntity(E element) {
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory().createEntityManager();
         entityManager.getTransaction().begin();
         E el;
 
@@ -48,7 +48,7 @@ public class ElementDAO<E extends StandardDBEntity> implements BaseDao<E> {
 
     @Override
     public E findById(int elementId) {
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory().createEntityManager();
         entityManager.getTransaction().begin();
 
         E element;
@@ -67,7 +67,7 @@ public class ElementDAO<E extends StandardDBEntity> implements BaseDao<E> {
     @SuppressWarnings("unchecked")
     @Override
     public List<E> getAll() {
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory().createEntityManager();
         entityManager.getTransaction().begin();
 
         List<E> elements;
@@ -84,7 +84,7 @@ public class ElementDAO<E extends StandardDBEntity> implements BaseDao<E> {
 
     @Override
     public void remove(E element) {
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager entityManager = JpaUtil.getEntityManagerFactory().createEntityManager();
         entityManager.getTransaction().begin();
 
         try {

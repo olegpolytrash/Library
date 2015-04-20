@@ -5,6 +5,6 @@ import com.soft.library.dataBase.model.Library;
 /**
  * Created by Oleg on 17.04.2015.
  */
-public interface LibraryDAO extends BaseDao<Library>{
+public interface LibraryDao extends BaseDao<Library>{
 
 }
