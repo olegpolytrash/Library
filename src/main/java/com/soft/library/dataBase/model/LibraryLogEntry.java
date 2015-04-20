@@ -11,11 +11,14 @@ import java.util.Date;
 public class LibraryLogEntry extends StandardDBEntity  {
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Book book;
+    
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Reader reader;
+    
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date taken;
+    
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date returned;

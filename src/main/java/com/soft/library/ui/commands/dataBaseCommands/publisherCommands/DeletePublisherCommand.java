@@ -1,5 +1,7 @@
 package com.soft.library.ui.commands.dataBaseCommands.publisherCommands;
 
+import com.soft.library.dataBase.service.AdvPublisherService;
+import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
 /**
@@ -8,9 +10,8 @@ import com.soft.library.ui.commandCore.Command;
 public class DeletePublisherCommand implements Command {
     @Override
     public void execute() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Enter title:");
-//        AdvPublisherService.deletePublisher(scanner.nextLine());
+        System.out.println("Enter publisher title:");
+        new AdvPublisherService().deletePublisher(ValidData.getWords());
     }
 
     @Override

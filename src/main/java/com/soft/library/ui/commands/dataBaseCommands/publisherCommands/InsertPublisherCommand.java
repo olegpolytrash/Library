@@ -1,5 +1,7 @@
 package com.soft.library.ui.commands.dataBaseCommands.publisherCommands;
 
+import com.soft.library.dataBase.service.AdvPublisherService;
+import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
 /**
@@ -9,9 +11,12 @@ public class InsertPublisherCommand implements Command {
 
     @Override
     public void execute() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Type in publisher's name: ");
-//        AdvPublisherService.addPublisher(scanner.nextLine());
+        AdvPublisherService aas = new AdvPublisherService();
+        String publisherName;
+
+        System.out.println("Type in Publisher's name: ");
+        publisherName = ValidData.getWords();
+        aas.addPublisher(publisherName);
     }
 
     @Override

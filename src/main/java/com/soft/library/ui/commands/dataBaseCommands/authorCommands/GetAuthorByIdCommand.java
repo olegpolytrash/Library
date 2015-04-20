@@ -3,6 +3,7 @@ package com.soft.library.ui.commands.dataBaseCommands.authorCommands;
 import java.util.Scanner;
 
 import com.soft.library.dataBase.service.AdvAuthorService;
+import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
 /**
@@ -11,10 +12,10 @@ import com.soft.library.ui.commandCore.Command;
 public class GetAuthorByIdCommand implements Command {
     @Override
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
+
         AdvAuthorService aas = new AdvAuthorService();
         System.out.println("Enter id: ");
-        int authorId = scanner.nextInt();
+        int authorId = ValidData.getDigit();
         System.out.println(aas.getAuthorById(authorId));
     }
 

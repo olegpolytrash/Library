@@ -12,12 +12,16 @@ import java.util.Objects;
 @Entity
 public class Library extends StandardDBEntity  {
     private Integer pages;
+    
     @Column(nullable = false)
     private Integer year;
+    
     @Column(nullable = false)
     private Integer quantity;
+    
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Book book;
+    
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Publisher publisher;
 

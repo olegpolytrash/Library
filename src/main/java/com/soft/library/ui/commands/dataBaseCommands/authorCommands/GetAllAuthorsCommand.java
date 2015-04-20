@@ -9,8 +9,7 @@ import com.soft.library.ui.commandCore.Command;
 public class GetAllAuthorsCommand implements Command {
     @Override
     public void execute() {
-        AdvAuthorService aas = new AdvAuthorService();
-        aas.printAuthors();
+        new AdvAuthorService().printAuthors();
     }
 
     @Override

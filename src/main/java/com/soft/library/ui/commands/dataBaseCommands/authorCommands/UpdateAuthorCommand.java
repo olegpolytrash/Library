@@ -1,5 +1,7 @@
 package com.soft.library.ui.commands.dataBaseCommands.authorCommands;
 
+import com.soft.library.dataBase.service.AdvAuthorService;
+import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
 /**
@@ -8,12 +10,12 @@ import com.soft.library.ui.commandCore.Command;
 public class UpdateAuthorCommand implements Command {
     @Override
     public void execute() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Type in Author's old name, new name: ");
-//        String newName = scanner.nextLine();
-//        String oldName = newName.substring(0, newName.indexOf(','));
-//        newName = newName.substring(newName.indexOf(' ')).trim();
-//        AdvAuthorService.updateAuthors(oldName, newName);
+        System.out.println("Type in Author's old name: ");
+        String oldName = ValidData.getWords();
+        System.out.println("Type in Author's new name: ");
+        String newName = ValidData.getWords();
+        new AdvAuthorService().updateAuthors(oldName, newName);
+        
     }
 
     @Override

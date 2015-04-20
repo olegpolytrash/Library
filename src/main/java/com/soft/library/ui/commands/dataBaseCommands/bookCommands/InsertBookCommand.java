@@ -1,5 +1,9 @@
 package com.soft.library.ui.commands.dataBaseCommands.bookCommands;
 
+import java.util.Set;
+
+import com.soft.library.dataBase.service.AdvBookService;
+import com.soft.library.dataBase.service.ValidData;
 import com.soft.library.ui.commandCore.Command;
 
 /**
@@ -9,9 +13,15 @@ public class InsertBookCommand implements Command {
 
     @Override
     public void execute() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Type in title: ");
-//        AdvBookService.addBook(scanner.nextLine());
+        AdvBookService aas = new AdvBookService();
+        String bookName;
+
+        System.out.println("Type in Book's name: ");
+        bookName = ValidData.getWords();
+        Set<String> books = ValidData
+                .continiouslyTyping("Type in at least one author who wrote"
+                        + " this book. Enter \"exit\" for quit");
+        aas.addBook(bookName, books);
     }
 
     @Override
