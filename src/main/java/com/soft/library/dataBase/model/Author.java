@@ -25,7 +25,7 @@ public class Author extends StandardEntity {
     @JoinTable(name = "BookAuthor",
             joinColumns = { @JoinColumn(name = "Book_ID") },
             inverseJoinColumns = {@JoinColumn(name = "Author_ID")})
-    private Set<Book> books = new HashSet<>(0);
+    private Set<Book> books = new HashSet<>();
 
     public Author() {
     }
