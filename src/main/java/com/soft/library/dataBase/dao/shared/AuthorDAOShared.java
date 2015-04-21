@@ -13,9 +13,7 @@ import javax.persistence.EntityManager;
  * All methods of this class can be used in a shared transaction with other methods.
  */
 public class AuthorDaoShared extends BaseDaoShared<Author> implements AuthorDao {
-
     public AuthorDaoShared(EntityManager entityManager) {
         super(Author.class, entityManager);
     }
-
 }

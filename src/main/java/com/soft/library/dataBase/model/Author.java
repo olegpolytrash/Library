@@ -1,5 +1,8 @@
 package com.soft.library.dataBase.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,13 +12,18 @@ import java.util.Set;
  */
 @Entity
 public class Author extends StandardEntity {
-
+    /**
+     * The author's name
+     */
     @Column(nullable = false, unique = true)
     private String name;
-    
+
+    /**
+     * Set of books that the author wrote
+     */
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "BookAuthor", 
-            joinColumns = { @JoinColumn(name = "Book_ID") }, 
+    @JoinTable(name = "BookAuthor",
+            joinColumns = { @JoinColumn(name = "Book_ID") },
             inverseJoinColumns = {@JoinColumn(name = "Author_ID")})
     private Set<Book> books = new HashSet<>(0);
 
@@ -23,12 +31,12 @@ public class Author extends StandardEntity {
     }
 
     public Author(String name) {
-        this.name = name;
+        this.setName(name);
     }
 
     public Author(String name, Set<Book> books) {
-        this.name = name;
-        this.books = books;
+        this.setName(name);
+        this.setBooks(books);
     }
 
     @Override
@@ -38,6 +46,21 @@ public class Author extends StandardEntity {
                 ", name='" + name + '\'' +
                 ", books=" + books +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof Author)) return false;
+
+        Author author = (Author) o;
+
+        return new EqualsBuilder()
+                .appendSuper(super.equals(o))
+                .append(getName(), author.getName())
+                .append(getBooks().size(), author.getBooks().size())
+                .isEquals();
     }
 
     public String getName() {

@@ -28,63 +28,27 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Class for testing Author's entity crud operations
+ * Class for testing Author's entity crud operations.
  */
 public class AuthorTest {
+    private static IDatabaseTester databaseTester;
+    private static IDataSet dataSet;
 
     public AuthorTest() {
-        JpaUtil.getEntityManagerFactory();
+        JpaUtil.ENTITY_MANAGER_FACTORY.getEntityManagerFactory();
     }
-
-    private static IDatabaseTester databaseTester;
-    static IDataSet dataSet;
 
     @BeforeClass
     public static void setUp() throws Exception {
-        databaseTester = new JdbcDatabaseTester("com.mysql.jdbc.Driver",
-                "jdbc:mysql://localhost/sql373362", "root", "1234");
-
+        databaseTester = TestUtils.getJdbcDatabaseTester();
         dataSet = new FlatXmlDataSetBuilder().build(new File("src\\test\\resources\\datasets\\author.xml"));
-
         databaseTester.setDataSet(dataSet);
-
     }
 
     @AfterClass
     public static void tearDown() throws Exception {
         DatabaseOperation.DELETE_ALL.execute(databaseTester.getConnection(), dataSet);
     }
-
-    static boolean isEqual(Author o1, Author o2, boolean checkBooks) {
-            if (!o1.equals(o2)) {
-                return false;
-            }
-
-            if (!o1.getName().equals(o2.getName())) {
-                return false;
-            }
-
-            if (o1.getBooks().size() != o2.getBooks().size()) {
-                return false;
-            }
-
-        if (checkBooks) {
-            Iterator<Book> itO1 = o1.getBooks().iterator();
-            Iterator<Book> itO2 = o1.getBooks().iterator();
-
-            while (itO2.hasNext()) {
-                if (!BookTest.isEqual(itO1.next(), itO2.next(), false)) {
-                    return false;
-                }
-            }
-        } else {
-            if (o1.getBooks().size() != o2.getBooks().size()) {
-                return false;
-            }
-        }
-
-            return true;
-        }
 
     @Before
     public void tear() throws Exception {
@@ -96,7 +60,7 @@ public class AuthorTest {
         AuthorDao authorDao = new AuthorDaoIsolated();
         Set<Book> books = new HashSet<>(  new BookDaoIsolated().getAll() );
 
-        // create and saveNewEntity an author
+        // create and save an author
         Author originalAuthor = new Author("test");
         originalAuthor.setBooks(books);
         originalAuthor = authorDao.saveEntity(originalAuthor);
@@ -105,7 +69,7 @@ public class AuthorTest {
         Author authorFromBD = authorDao.findById(originalAuthor.getId());
 
         // check if the correct author was found
-        assertTrue(isEqual(authorFromBD, originalAuthor, true));
+        assertEquals(authorFromBD, originalAuthor);
     }
 
     @Test
@@ -124,7 +88,7 @@ public class AuthorTest {
 
         // check if update was successful
         Author author = authorDao.findById(originalAuthor.getId());
-        assertTrue(isEqual(author, originalAuthor, true));
+        assertEquals(author, originalAuthor);
     }
 
     @Test
@@ -132,7 +96,7 @@ public class AuthorTest {
         AuthorDao authorDao = new AuthorDaoIsolated();
         Set<Book> books = new HashSet<>(  new BookDaoIsolated().getAll() );
 
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY.createEntityManager();
         entityManager.getTransaction().begin();
 
         // add an author to the db
@@ -149,7 +113,7 @@ public class AuthorTest {
 
         // get the updated author from bd and check if the name was updated
         Author authorByID = authorDao.findById(originalAuthor.getId());
-        assertTrue(isEqual(authorByID, originalAuthor, true));
+        assertEquals(authorByID, originalAuthor);
     }
 
     @Test
@@ -185,9 +149,9 @@ public class AuthorTest {
         authorDao.remove(authors[1]);
 
         // check if the author was removed
-        Author a = authorDao.findById(authors[1].getId());
+        Author author = authorDao.findById(authors[1].getId());
 
-        assertEquals(null, a);
+        assertEquals(null, author);
     }
 
     @Test
@@ -203,6 +167,6 @@ public class AuthorTest {
         Author authorFromBD = authorDao.findById(originalAuthor.getId());
 
         // check
-        assertTrue(isEqual(authorFromBD, originalAuthor, true));
+        assertEquals(authorFromBD, originalAuthor);
     }
 }

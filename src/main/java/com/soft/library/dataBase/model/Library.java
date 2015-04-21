@@ -1,5 +1,8 @@
 package com.soft.library.dataBase.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,35 +13,50 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class Library extends StandardEntity {
-    private Integer pages;
-    
-    @Column(nullable = false)
-    private Integer year;
-    
-    @Column(nullable = false)
-    private Integer quantity;
-    
+    /**
+     * The books that is in the library.
+     */
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Book book;
-    
+
+    /**
+     * Publisher of the book.
+     */
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Publisher publisher;
+
+    /**
+     * The book's pages.
+     */
+    private Integer pages;
+
+    /**
+     * Year when he book was published.
+     */
+    @Column(nullable = false)
+    private Integer year;
+
+    /**
+     * Year when he book was published.
+     */
+    @Column(nullable = false)
+    private Integer quantity;
 
     public Library() {
     }
 
     public Library(Integer pages, Integer year, Integer quantity) {
-        this.pages = pages;
-        this.year = year;
-        this.quantity = quantity;
+        this.setPages(pages);
+        this.setYear(year);
+        this.setQuantity(quantity);
     }
 
     public Library(Integer pages, Integer year, Integer quantity, Book book, Publisher publisher) {
-        this.pages = pages;
-        this.year = year;
-        this.quantity = quantity;
-        this.book = book;
-        this.publisher = publisher;
+        this.setPages(pages);
+        this.setYear(year);
+        this.setQuantity(quantity);
+        this.setBook(book);
+        this.setPublisher(publisher);
     }
 
     @Override
@@ -51,6 +69,24 @@ public class Library extends StandardEntity {
                 ", book=" + book +
                 ", publisher=" + publisher +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof Library)) return false;
+
+        Library library = (Library) o;
+
+        return new EqualsBuilder()
+                .appendSuper(super.equals(o))
+                .append(getBook(), library.getBook())
+                .append(getPublisher(), library.getPublisher())
+                .append(getPages(), library.getPages())
+                .append(getYear(), library.getYear())
+                .append(getQuantity(), library.getQuantity())
+                .isEquals();
     }
 
     public Integer getPages() {

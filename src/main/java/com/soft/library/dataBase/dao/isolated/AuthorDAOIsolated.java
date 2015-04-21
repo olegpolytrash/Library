@@ -5,6 +5,7 @@ package com.soft.library.dataBase.dao.isolated;
 
 import com.soft.library.dataBase.dao.AuthorDao;
 import com.soft.library.dataBase.model.Author;
+import org.hibernate.mapping.Table;
 
 /**
  * Class for the Author entity dao methods.

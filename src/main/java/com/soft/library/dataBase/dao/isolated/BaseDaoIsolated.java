@@ -20,9 +20,12 @@ public abstract class BaseDaoIsolated<E extends StandardEntity> implements BaseD
         this.elementClass = elementClass;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void saveNewEntity(E element) {
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY.createEntityManager();
         entityManager.getTransaction().begin();
 
         try {
@@ -35,9 +38,12 @@ public abstract class BaseDaoIsolated<E extends StandardEntity> implements BaseD
         entityManager.getTransaction().commit();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public E saveEntity(E element) {
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY.createEntityManager();
         entityManager.getTransaction().begin();
         E el;
 
@@ -52,9 +58,12 @@ public abstract class BaseDaoIsolated<E extends StandardEntity> implements BaseD
         return el;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public E findById(int elementId) {
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY.createEntityManager();
         entityManager.getTransaction().begin();
 
         E element;
@@ -70,10 +79,13 @@ public abstract class BaseDaoIsolated<E extends StandardEntity> implements BaseD
         return element;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("unchecked")
     @Override
     public List<E> getAll() {
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY.createEntityManager();
         entityManager.getTransaction().begin();
 
         List<E> elements;
@@ -88,9 +100,12 @@ public abstract class BaseDaoIsolated<E extends StandardEntity> implements BaseD
         return elements;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void remove(E element) {
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY.createEntityManager();
         entityManager.getTransaction().begin();
 
         try {

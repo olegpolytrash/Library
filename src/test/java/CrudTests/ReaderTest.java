@@ -22,31 +22,26 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Class for testing Reader's entity crud operations
+ * Class for testing Reader's entity crud operations.
  */
 public class ReaderTest {
-    public ReaderTest() {
-        JpaUtil.getEntityManagerFactory();
-    }
-
     private static IDatabaseTester databaseTester;
-    static IDataSet dataSet;
+    private static IDataSet dataSet;
+
+    public ReaderTest() {
+        JpaUtil.ENTITY_MANAGER_FACTORY.getEntityManagerFactory();
+    }
 
     @BeforeClass
     public static void setUp() throws Exception {
-        databaseTester = new JdbcDatabaseTester("com.mysql.jdbc.Driver",
-                "jdbc:mysql://localhost/sql373362", "root", "1234");
-
+        databaseTester = TestUtils.getJdbcDatabaseTester();
         dataSet = new FlatXmlDataSetBuilder().build(new File("src\\test\\resources\\datasets\\reader.xml"));
-
         databaseTester.setDataSet(dataSet);
-
     }
 
     @Before
     public void tearDown() throws Exception {
-        DatabaseOperation.DELETE_ALL.execute(databaseTester
-                .getConnection(), dataSet);
+        DatabaseOperation.DELETE_ALL.execute(databaseTester.getConnection(), dataSet);
     }
 
     @Test
@@ -62,7 +57,6 @@ public class ReaderTest {
 
         // check if the correct reader was found
         assertEquals(readerFromBD, originalReader);
-        assertEquals(readerFromBD.getName(), originalReader.getName());
     }
 
     @Test
@@ -80,7 +74,6 @@ public class ReaderTest {
         // check if update was successful
         Reader readerFromBD = readerDao.findById(originalReader.getId());
         assertEquals(readerFromBD, originalReader);
-        assertEquals(readerFromBD.getName(), originalReader.getName());
     }
 
     @Test
@@ -92,12 +85,12 @@ public class ReaderTest {
         readerDao.saveNewEntity(originalReader);
 
         // change name of the detached object and update it
-        originalReader.setName("asd");
+        originalReader.setName("new name");
         originalReader = readerDao.saveEntity(originalReader);
 
         // get the updated reader from bd and check if the name was updated
         Reader readerFromBD = readerDao.findById(originalReader.getId());
-        assertEquals(readerFromBD.getName(), originalReader.getName());
+        assertEquals(readerFromBD, originalReader);
     }
 
     @Test
@@ -153,7 +146,6 @@ public class ReaderTest {
 
         // check
         assertEquals(readerFromBD, originalReader);
-        assertEquals(readerFromBD.getName(), originalReader.getName());
     }
 
     @Test(expected = PersistenceException.class)

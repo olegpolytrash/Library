@@ -5,6 +5,5 @@ import com.soft.library.dataBase.model.Reader;
 /**
  * Interface for the Reader entity methods
  */
-public interface ReaderDao extends BaseDao<Reader>{
-
+public interface ReaderDao extends BaseDao<Reader> {
 }

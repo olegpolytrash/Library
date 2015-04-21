@@ -8,7 +8,12 @@ import java.util.List;
  * Base interface for all dao objects
  * @param <E> entity that is a subclass of the StandardEntity class
  */
-public interface BaseDao  <E extends StandardEntity> {
+public interface BaseDao <E extends StandardEntity> {
+    /**
+     * Find a row by it's id
+     * @param id to search for
+     * @return an object that represents the row found
+     */
     E findById(int id);
 
     /**
@@ -18,6 +23,11 @@ public interface BaseDao  <E extends StandardEntity> {
      * @throws PersistentObjectException if entity or one of it's cascade dependencies are detached
      */
     void saveNewEntity(E entity);
+
+    /**
+     * Remove an entity
+     * @param entity to remove
+     */
     void remove(E entity);
 
     /**
@@ -28,5 +38,9 @@ public interface BaseDao  <E extends StandardEntity> {
      */
     E saveEntity(E entity);
 
+    /**
+     * Get all rows of the corresponding table.
+     * @return objects that represent rows of the table
+     */
     List<E> getAll();
 }

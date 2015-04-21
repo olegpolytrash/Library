@@ -12,7 +12,6 @@ import com.soft.library.dataBase.model.LibraryLogEntry;
  * It's impossible to call a method of this class with a method of any other dao class in a single shared transaction.
  */
 public class LibraryLogEntryDaoIsolated extends BaseDaoIsolated<LibraryLogEntry> implements LibraryLogEntryDao {
-
     public LibraryLogEntryDaoIsolated() {
         super(LibraryLogEntry.class);
     }

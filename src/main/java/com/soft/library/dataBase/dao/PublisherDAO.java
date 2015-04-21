@@ -6,5 +6,4 @@ import com.soft.library.dataBase.model.Publisher;
  * Interface for the Publisher entity methods
  */
 public interface PublisherDao extends BaseDao<Publisher>{
-
 }

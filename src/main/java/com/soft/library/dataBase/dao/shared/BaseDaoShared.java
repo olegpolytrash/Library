@@ -12,13 +12,12 @@ import java.util.List;
  */
 public class BaseDaoShared<E extends StandardEntity> implements BaseDao<E> {
     private Class<E> elementClass;
+    private EntityManager entityManager;
 
     public BaseDaoShared(Class<E> elementClass, EntityManager entityManager) {
         this.elementClass = elementClass;
         this.entityManager = entityManager;
     }
-
-    EntityManager entityManager;
 
     public EntityManager getEntityManager() {
         return entityManager;
@@ -28,16 +27,25 @@ public class BaseDaoShared<E extends StandardEntity> implements BaseDao<E> {
         this.entityManager = entityManager;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void saveNewEntity(E element) {
         entityManager.persist(element);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public E saveEntity(E element) {
         return entityManager.merge(element);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("unchecked")
     @Override
     public E findById(int elementId) {
@@ -46,6 +54,9 @@ public class BaseDaoShared<E extends StandardEntity> implements BaseDao<E> {
         return element;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("unchecked")
     @Override
     public List<E> getAll() {
@@ -54,6 +65,9 @@ public class BaseDaoShared<E extends StandardEntity> implements BaseDao<E> {
         return elements;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void remove(E element) {
             entityManager.remove(element);

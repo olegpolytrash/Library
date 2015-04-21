@@ -14,7 +14,7 @@ import java.util.Set;
 public class BookService {
     public void addBook(String title, Set<String> authors) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -33,7 +33,7 @@ public class BookService {
 
     public int updateBooks(String oldName, String newName) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -57,7 +57,7 @@ public class BookService {
 
     public void printBooks() {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -76,7 +76,7 @@ public class BookService {
 
     public Book getBookById(int bookDAOId) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -93,7 +93,7 @@ public class BookService {
 
     public void deleteBook(String name) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 

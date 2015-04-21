@@ -20,7 +20,7 @@ import java.util.Set;
 public class AuthorService {
     public void addAuthor(String title, Set<String> books) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -39,7 +39,7 @@ public class AuthorService {
 
     public int updateAuthors(String oldName, String newName) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -63,7 +63,7 @@ public class AuthorService {
 
     public void printAuthors() {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -82,7 +82,7 @@ public class AuthorService {
 
     public Author getAuthorById(int authorDAOId) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -99,7 +99,7 @@ public class AuthorService {
 
     public void deleteAuthor(String name) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 

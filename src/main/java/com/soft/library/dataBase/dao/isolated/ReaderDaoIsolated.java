@@ -12,7 +12,6 @@ import com.soft.library.dataBase.model.Reader;
  * It's impossible to call a method of this class with a method of any other dao class in a single shared transaction.
  */
 public class ReaderDaoIsolated extends BaseDaoIsolated<Reader> implements ReaderDao {
-
     public ReaderDaoIsolated() {
         super(Reader.class);
     }

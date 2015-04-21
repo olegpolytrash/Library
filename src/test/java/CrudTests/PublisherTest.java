@@ -20,25 +20,21 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Class for testing Publisher's entity crud operations
+ * Class for testing Publisher's entity crud operations.
  */
 public class PublisherTest {
-
     private static IDatabaseTester databaseTester;
     private static IDataSet dataSet;
 
     @BeforeClass
     public static void setUp() throws Exception {
-        databaseTester = new JdbcDatabaseTester("com.mysql.jdbc.Driver",
-                "jdbc:mysql://localhost/sql373362", "root", "1234");
-
+        databaseTester = TestUtils.getJdbcDatabaseTester();
         dataSet = new FlatXmlDataSetBuilder().build(new File("src\\test\\resources\\datasets\\publisher.xml"));
-
         databaseTester.setDataSet(dataSet);
     }
 
     public PublisherTest() {
-        JpaUtil.getEntityManagerFactory();
+        JpaUtil.ENTITY_MANAGER_FACTORY.getEntityManagerFactory();
     }
 
     @Before
@@ -59,7 +55,6 @@ public class PublisherTest {
 
         // check if the correct publisher was found
         assertEquals(publisherFromBD, originalPublisher);
-        assertEquals(publisherFromBD.getName(), originalPublisher.getName());
     }
 
     @Test
@@ -77,7 +72,6 @@ public class PublisherTest {
         // check if update was successful
         Publisher publisherFromBD = publisherDao.findById(originalPublisher.getId());
         assertEquals(publisherFromBD, originalPublisher);
-        assertEquals(publisherFromBD.getName(), originalPublisher.getName());
     }
 
     @Test
@@ -89,12 +83,11 @@ public class PublisherTest {
         publisherDao.saveNewEntity(originalPublisher);
 
         // change name of the detached object and update it
-        originalPublisher.setName("asd");
+        originalPublisher.setName("new name");
         originalPublisher = publisherDao.saveEntity(originalPublisher);
 
         // get the updated publisher from bd and check if the name was updated
         Publisher publisherFromBD = publisherDao.findById(originalPublisher.getId());
-        assertEquals(publisherFromBD.getName(), originalPublisher.getName());
     }
 
     @Test
@@ -146,6 +139,5 @@ public class PublisherTest {
 
         // check
         assertEquals(publisherFromBD, originalPublisher);
-        assertEquals(publisherFromBD.getName(), originalPublisher.getName());
     }
 }

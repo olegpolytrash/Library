@@ -1,5 +1,8 @@
 package com.soft.library.dataBase.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -19,22 +22,26 @@ public abstract class StandardEntity implements Serializable {
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.setId(id);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+
         if (!(o instanceof StandardEntity)) return false;
 
         StandardEntity that = (StandardEntity) o;
 
-        return !(getId() != null ? !getId().equals(that.getId()) : that.getId() != null);
-
+        return new EqualsBuilder()
+                .append(getId(), that.getId())
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-        return getId() != null ? getId().hashCode() : 0;
+        return new HashCodeBuilder(17, 37)
+                .append(getId())
+                .toHashCode();
     }
 }

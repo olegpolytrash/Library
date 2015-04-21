@@ -1,5 +1,8 @@
 package com.soft.library.dataBase.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,25 +12,31 @@ import java.util.Set;
  */
 @Entity
 public class Book extends StandardEntity {
+    /**
+     * The book's name
+     */
     @Column(nullable = false, unique = true)
     private String name;
-    
+
+    /**
+     * Authors that wrote this book
+     */
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "BookAuthor", 
-            joinColumns = {@JoinColumn(name = "Author_ID")}, 
+    @JoinTable(name = "BookAuthor",
+            joinColumns = {@JoinColumn(name = "Author_ID")},
             inverseJoinColumns = {@JoinColumn(name = "Book_ID")})
     private Set<Author> authors = new HashSet<>(0);
 
     public Book() {
     }
 
-    public Book(String name, Set<Author> authors) {
-        this.name = name;
-        this.authors = authors;
+    public Book(String name) {
+        this.setName(name);
     }
 
-    public Book(String name) {
-        this.name = name;
+    public Book(String name, Set<Author> authors) {
+        this.setName(name);
+        this.setAuthors(authors);
     }
 
     @Override
@@ -39,6 +48,22 @@ public class Book extends StandardEntity {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof Book)) return false;
+
+        Book book = (Book) o;
+
+        return new EqualsBuilder()
+                .appendSuper(super.equals(o))
+                .append(getName(), book.getName())
+                .append(getAuthors().size(), book.getAuthors().size())
+                .isEquals();
+    }
+
+    @Column(nullable = false, unique = true)
     public String getName() {
         return name;
     }

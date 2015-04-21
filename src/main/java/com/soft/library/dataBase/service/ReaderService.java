@@ -13,7 +13,7 @@ public class ReaderService {
             String address, Date birthDate) {
         
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -30,7 +30,7 @@ public class ReaderService {
     public int updateReaderBDate(String oldBDate, String newBDate) {
         
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
         
@@ -55,7 +55,7 @@ public class ReaderService {
             String oldSecName, String newSecName) {
         
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -81,7 +81,7 @@ public class ReaderService {
 
     public int updateReaderMobile(String oldMobile, String newMobile) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -105,7 +105,7 @@ public class ReaderService {
 
     public int updateReaderAddress(String oldAddress, String newAddress) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -129,7 +129,7 @@ public class ReaderService {
 
     public void printReaders() {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -148,7 +148,7 @@ public class ReaderService {
 
     public Reader getReaderById(int readerDAOId) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -165,7 +165,7 @@ public class ReaderService {
 
     public void deleteReader(String name) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 

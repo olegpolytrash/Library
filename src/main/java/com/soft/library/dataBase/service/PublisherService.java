@@ -17,7 +17,7 @@ import javax.persistence.EntityManager;
 public class PublisherService {
     public void addPublisher(String name) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -33,7 +33,7 @@ public class PublisherService {
 
     public int updatePublishers(String oldName, String newName) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -57,7 +57,7 @@ public class PublisherService {
 
     public void printPublishers() {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -76,7 +76,7 @@ public class PublisherService {
 
     public Publisher getPublisherById(int publisherDAOId) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -93,7 +93,7 @@ public class PublisherService {
 
     public void deletePublisher(String name) {
         // prepare
-        EntityManager entityManager = JpaUtil.getEntityManagerFactory()
+        EntityManager entityManager = JpaUtil.ENTITY_MANAGER_FACTORY
                 .createEntityManager();
         entityManager.getTransaction().begin();
 

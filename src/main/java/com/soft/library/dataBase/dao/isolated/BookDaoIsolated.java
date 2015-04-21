@@ -12,7 +12,6 @@ import com.soft.library.dataBase.model.Book;
  * It's impossible to call a method of this class with a method of any other dao class in a single shared transaction.
  */
 public class BookDaoIsolated extends BaseDaoIsolated<Book> implements BookDao {
-
     public BookDaoIsolated() {
         super(Book.class);
     }
